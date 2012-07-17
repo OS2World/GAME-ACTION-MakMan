@@ -1,0 +1,183 @@
+#define INCL_BASE
+#define OS2_API32
+#define INCL_DOSDATETIME
+
+#include <os2.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <iostream.h>
+#include <time.h>
+#include <pmbitmap.h>
+
+#include "direct.hpp"
+#include "tile.hpp"
+#include "playfield.hpp"
+#include "sprite.hpp"
+#include "ghost.hpp"
+#include "makman.hpp"
+
+
+int main ( int argc, char** argv )
+{
+   int fldDsgn[] =
+    {  spc, spc, spc, spc, spc, spc, spc, spc, spc, spc, spc, spc, spc, spc, spc, spc, spc, spc, spc, spc, spc,
+       dr , hor, hor, hor, hor, hor, hor, hor, hor, hor, ldr, hor, hor, hor, hor, hor, hor, hor, hor, hor, ld ,
+       ver, dot, dot, dot, dot, dot, dot, dot, dot, dot, ver, dot, dot, dot, dot, dot, dot, dot, dot, dot, ver,
+       ver, bdt, le , hor, re , dot, le , ldr, re , dot, ver, dot, le , hor, re , dot, le , hor, re , bdt, ver,
+       ver, dot, dot, dot, dot, dot, dot, ver, dot, dot, ver, dot, dot, dot, dot, dot, dot, dot, dot, dot, ver,
+       dru, hor, re , dot, le , ld , dot, de , dot, le , rul, re , dot, le , re , dot, ue , dot, ue , dot, ver,
+       ver, dot, dot, dot, dot, ver, dot, dot, dot, dot, dot, dot, dot, dot, dot, dot, ver, dot, ver, dot, ver,
+       ver, dot, dr , ld , dot, ver, dot, dr , hor, hor, dor, hor, hor, ld , dot, le , ul , dot, de , dot, ver,
+       ver, dot, ver, ver, dot, de , dot, ver, spc, spc, spc, spc, spc, ver, dot, dot, dot, dot, dot, dot, ver,
+       ver, dot, ver, ver, dot, dot, dot, ver, spc, spc, spc, spc, spc, ver, dot, dr , hor, hor, ld , dot, ver,
+       ver, dot, ru , ul , dot, ue , dot, ru , hor, hor, hor, hor, hor, ul , dot, ru , hor, hor, ul , dot, ver,
+       ver, dot, dot, dot, dot, ver, dot, dot, dot, dot, spc, dot, dot, dot, dot, dot, dot, dot, dot, dot, ver,
+       dru, hor, re , dot, le , ul , dot, le , hor, hor, ldr, hor, hor, re , dot, ue , dot, lre, dot, le , uld,
+       ver, dot, dot, dot, dot, dot, dot, dot, dot, dot, ver, dot, dot, dot, dot, ver, dot, dot, dot, dot, ver,
+       ver, bdt, le , hor, hor, hor, hor, hor, re , dot, de , dot, le , hor, hor, rul, hor, hor, re , bdt, ver,
+       ver, dot, dot, dot, dot, dot, dot, dot, dot, dot, dot, dot, dot, dot, dot, dot, dot, dot, dot, dot, ver,
+       ru , hor, hor, hor, hor, hor, hor, hor, hor, hor, hor, hor, hor, hor, hor, hor, hor, hor, hor, hor, ul  };
+
+   playfield myfld ( fieldSizeX, fieldSizeY, 0, 0 );
+   char *pillstuff[] =
+   {
+    "tiles\\power dot.bmp",
+    "tiles\\power dot 1.bmp",
+    "tiles\\power dot 2.bmp",
+    "tiles\\power dot 3.bmp"
+    };
+
+   makman    myman;
+   ghost     inky, blinky, stinky, andrej;
+
+   cout << "MakMan/2 v0.03 (c) 1995 M^2 Software Inc."<<endl;
+   cout << "Short Knie 33 bit OS/2 extender (c) 1956-95 Short Knie Inc."<<endl;
+   cout << "Program/Artwork by Markellos J. Diorinos"<<endl<<endl;
+
+
+   // Semaphore Stuff
+    APIRET rc;
+    ULONG TimeInterval ; // xxx ms
+    UCHAR szName[20];
+    HSEM  SemHandle = 0;
+    ULONG flAttr = 0, pstCnt;
+    BOOL32 fState = FALSE;
+    HTIMER Handle = 0;
+    PHTIMER pHandle = &Handle;
+    ULONG   ulTimeout = 200L; // timeout xxx ms
+
+
+    TimeInterval = 26; // 26ms
+    randomize();
+
+    cout << "Loading tiles .......... "<<frt<<endl;
+
+   myfld.load_backtile ( "tiles\\blank.bmp" );
+   myfld.load_backtile ( "tiles\\horizontal.bmp" );
+   myfld.load_backtile ( "tiles\\vertical.bmp" );
+   myfld.load_backtile ( "tiles\\left to down.bmp" );
+   myfld.load_backtile ( "tiles\\right to up.bmp" );
+   myfld.load_backtile ( "tiles\\up to left.bmp" );
+   myfld.load_backtile ( "tiles\\down to right.bmp" );
+   myfld.load_backtile ( "tiles\\down right up.bmp" );
+   myfld.load_backtile ( "tiles\\left down right.bmp" );
+   myfld.load_backtile ( "tiles\\right up left.bmp" );
+   myfld.load_backtile ( "tiles\\up left down.bmp" );
+   myfld.load_backtile ( "tiles\\down end.bmp" );
+   myfld.load_backtile ( "tiles\\left end.bmp" );
+   myfld.load_backtile ( "tiles\\right end.bmp" );
+   myfld.load_backtile ( "tiles\\up end.bmp" );
+   myfld.load_backtile ( "tiles\\dot.bmp");
+   myfld.load_backtile ( "tiles\\ghost door.bmp");
+   myfld.load_backtile ( "tiles\\left end right end.bmp");
+   myfld.load_backtile ( sizeof(pillstuff)/sizeof(char*), pillstuff, 6);
+   myfld.load_backtile ( "tiles\\middle mouth right.bmp");
+   myfld.load_backtile ( "tiles\\score 0.bmp");
+   myfld.load_backtile ( "tiles\\score 1.bmp");
+   myfld.load_backtile ( "tiles\\score 2.bmp");
+   myfld.load_backtile ( "tiles\\score 3.bmp");
+   myfld.load_backtile ( "tiles\\score 4.bmp");
+   myfld.load_backtile ( "tiles\\score 5.bmp");
+   myfld.load_backtile ( "tiles\\score 6.bmp");
+   myfld.load_backtile ( "tiles\\score 7.bmp");
+   myfld.load_backtile ( "tiles\\score 8.bmp");
+   myfld.load_backtile ( "tiles\\score 9.bmp");
+   myfld.load_backtile ( "tiles\\Cherry.bmp");
+
+   cout << "Registering sprites .... "<<5<<endl;
+   myfld.register_sprite (&myman);
+   myfld.register_sprite (&inky);
+   myfld.register_sprite (&blinky);
+   myfld.register_sprite (&stinky);
+   myfld.register_sprite (&andrej);
+
+   if ( DirectScreenInit () )
+      {
+      cerr << "The display driver doesn't suport direct screen access.\n" << endl;
+      return ( 1 );
+      }
+
+
+    strcpy(szName,"\\SEM32\\MAKTIMER");
+    rc = DosCreateEventSem(szName,(PULONG) &SemHandle,
+                            flAttr, fState);
+    cout << "Created semaphore ...... "<<rc<<endl;
+
+   // Print out information specific to your adapter.
+   // DirectPrintInfo();
+
+
+   game myGame;
+   do
+   {
+    // Set up initial game value
+    int pd = 400, ght = 50, gpt = 0, iq = 6, ff = 1200, fd = 300, fv = 200, fvi = 0;
+
+    // start the new game....
+    myfld.new_game();
+
+    // to start a new level..
+    myGame = level_done;
+
+    // and start the ticker too!
+    rc = DosStartTimer(TimeInterval, SemHandle, &Handle);
+
+    // play the same level until I lose...
+    while ( myGame != game_over && myGame != usr_exit)
+    {
+        // go to next level...
+        if (myGame == level_done)
+        {
+            myfld.set_field ( fldDsgn, sizeof(fldDsgn));
+            myfld.set_field_data( pd, ght, gpt, iq, ff, fd, fv, fvi );
+            myfld.show();
+            // prepare parameters for next level
+            if (pd > 100) pd  -= 30;
+            if (ght>20)   ght -= 5;
+            if (iq <100)  iq  += 5;
+            if (ff<4000)  ff  += 200;
+            if (fd>100)   fd  -= 20;
+            fv *= 2;
+        }
+
+        rc = DosWaitEventSem((ULONG)SemHandle, ulTimeout);
+        DosResetEventSem ((ULONG)SemHandle, &pstCnt);
+        myGame = myfld.tick();
+                 myfld.update();
+
+    } // while !game_over
+
+   // Stop timer
+    DosStopTimer(Handle);
+
+   } while (myGame != usr_exit);
+
+   cout << "Now, that was fun, wasn't it?"<<endl;
+
+
+   // Close the video device driver.
+   DirectScreenTerm();
+
+   return (0);
+}

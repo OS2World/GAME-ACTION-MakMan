@@ -1,0 +1,40 @@
+Source code for MakMan/2
+------------------------
+
+Requires:
+ - HPFS File System
+ - the current 'normal' makman release, since sounds
+   and bitmaps are not included here
+ - an OS/2 C++ compiler
+ - the OS/2 PM and MMPM toolkits
+
+
+Licence agreement:
+ This code is provided 'as-is' with no waranty what so ever.
+ You may use the whole or parts of this code where you see fit as
+ long as an appropriate reference is made in the program documentation
+ (i.e. gime some credit people) AND I am given a free copy and
+ free lifetime updates of the resulting product (if any).
+
+The Code is under the GNU GPL License now.
+
+
+What most people don't know:
+ Is that this is my first PM/MMPM program, so don't assume that the
+ techniques used are always the best.
+
+Offering me a job:
+ I like software development and I think I'm good at it.
+ I like new and innovative projects, so feel free to talk with
+ me about any of your ideas. I *love* changing location from time to time...
+
+Contacting me:
+ Markellos J. Diorinos
+ N.Plastira 19, GR 542 50 Thessaloniki, Greece
+ Haagstr.17 #110, D 91054 Erlangen, Germany
+ msdiorin@immd9.informatik.uni-erlangen.de
+
+Other than that:
+ Enjoy.
+ The sound engine is still pretty messy, since it's been coded overnight.
+ Maybe i'll tidy up everything in a future release.

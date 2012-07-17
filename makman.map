@@ -1,0 +1,106 @@
+
+ makman
+
+ Start         Length     Name                   Class
+ 0001:00000000 000000004H _DATA                  DATA 32-bit
+ 0001:00000004 00000456CH DATA32                 DATA 32-bit
+ 0001:00004570 000000000H CTOR_DTOR1             DATA 32-bit
+ 0001:00004570 000000000H CTOR_DTOR2             DATA 32-bit
+ 0001:00004570 000000000H CTOR_DTOR3             DATA 32-bit
+ 0001:00004570 0000002E0H EH_DATA                DATA 32-bit
+ 0001:00004850 000000210H _VFT                   DATA 32-bit
+ 0001:00004A60 0000072D2H CODE32                 CODE 32-bit
+ 0001:0000BD40 00000009CH EH_CODE                CODE 32-bit
+ 0001:0000BDDC 000000C0CH CONST32_RO             CONST 32-bit
+ 0001:0000C9E8 00000013CH BSS32                  BSS 32-bit
+
+ Origin   Group
+ 0000:0   FLAT
+ 0001:0   DGROUP
+
+ Address       Export                  Alias
+
+ 0001:00000000 _mwGlobalInit           _mwGlobalInit
+
+.\obj\backtile.obj(backtile.cc) :  error L2029: '__vec__new2' : unresolved external
+.\obj\sprite.obj(sprite.cc) :  error L2029: '__vec__new2' : unresolved external
+e:\IbmCPP\lib\globinit.obj(/sol/lib/libc_l/misc_g/os2_t/globinit.c) :  error L2029: '_mwargstack' : unresolved external
+.\obj\GpiEngine.obj(gpiengine.cc) :  error L2029: '_fprintfieee' : unresolved external
+.\obj\diveengine.obj(diveengine.cc) :  error L2029: '_fprintfieee' : unresolved external
+.\obj\pmprocs.obj(pmprocs.cc) :  error L2029: '_fprintfieee' : unresolved external
+.\obj\pmmain.obj(pmmain.cc) :  error L2029: '_fprintfieee' : unresolved external
+.\obj\mmpm2sound.obj(mmpm2sound.cc) :  error L2029: '_fprintfieee' : unresolved external
+.\obj\makengine.obj(makengine.cc) :  error L2029: '_sprintfieee' : unresolved external
+.\obj\pmprocs.obj(pmprocs.cc) :  error L2029: '_sprintfieee' : unresolved external
+.\obj\pmmain.obj(pmmain.cc) :  error L2029: '_sprintfieee' : unresolved external
+.\obj\playfield.obj(playfield.cc) :  error L2029: '_sprintfieee' : unresolved external
+.\obj\tile.obj(tile.cc) :  error L2029: '_sprintfieee' : unresolved external
+.\obj\backtile.obj(backtile.cc) :  error L2029: '__vec__delete2' : unresolved external
+.\obj\sprite.obj(sprite.cc) :  error L2029: '__vec__delete2' : unresolved external
+.\obj\pmmain.obj(pmmain.cc) :  error L2029: 'free' : unresolved external
+.\obj\playfield.obj(playfield.cc) :  error L2029: 'cerr' : unresolved external
+.\obj\tile.obj(tile.cc) :  error L2029: 'cerr' : unresolved external
+.\obj\makengine.obj(makengine.cc) :  error L2029: '_Exception_CPP' : unresolved external
+.\obj\GpiEngine.obj(gpiengine.cc) :  error L2029: '_Exception_CPP' : unresolved external
+.\obj\diveengine.obj(diveengine.cc) :  error L2029: '_Exception_CPP' : unresolved external
+.\obj\pmmain.obj(pmmain.cc) :  error L2029: '_Exception_CPP' : unresolved external
+.\obj\mmpm2sound.obj(mmpm2sound.cc) :  error L2029: '_Exception_CPP' : unresolved external
+.\obj\ghost.obj(ghost.cc) :  error L2029: '_Exception_CPP' : unresolved external
+.\obj\makman.obj(makman.cc) :  error L2029: '_Exception_CPP' : unresolved external
+.\obj\playfield.obj(playfield.cc) :  error L2029: '_Exception_CPP' : unresolved external
+.\obj\pmmain.obj(pmmain.cc) :  error L2029: 'fopen' : unresolved external
+.\obj\GpiEngine.obj(gpiengine.cc) :  error L2029: 'malloc' : unresolved external
+.\obj\pmmain.obj(pmmain.cc) :  error L2029: 'malloc' : unresolved external
+.\obj\pmmain.obj(pmmain.cc) :  error L2029: 'fclose' : unresolved external
+.\obj\GpiEngine.obj(gpiengine.cc) :  error L2029: 'fflush' : unresolved external
+.\obj\diveengine.obj(diveengine.cc) :  error L2029: 'fflush' : unresolved external
+.\obj\pmprocs.obj(pmprocs.cc) :  error L2029: 'fflush' : unresolved external
+.\obj\pmmain.obj(pmmain.cc) :  error L2029: 'fflush' : unresolved external
+.\obj\mmpm2sound.obj(mmpm2sound.cc) :  error L2029: 'fflush' : unresolved external
+.\obj\playfield.obj(playfield.cc) :  error L2029: 'endl(ostream&)' : unresolved external
+.\obj\tile.obj(tile.cc) :  error L2029: 'endl(ostream&)' : unresolved external
+.\obj\makengine.obj(makengine.cc) :  error L2029: 'memcpy' : unresolved external
+.\obj\playfield.obj(playfield.cc) :  error L2029: 'memcpy' : unresolved external
+.\obj\tile.obj(tile.cc) :  error L2029: 'memcpy' : unresolved external
+.\obj\pmprocs.obj(pmprocs.cc) :  error L2029: 'strlen' : unresolved external
+.\obj\pmmain.obj(pmmain.cc) :  error L2029: 'strlen' : unresolved external
+e:\IbmCPP\lib\globinit.obj(/sol/lib/libc_l/misc_g/os2_t/globinit.c) :  error L2029: '_mwgoc' : unresolved external
+.\obj\pmmain.obj(pmmain.cc) :  error L2029: 'strcmp' : unresolved external
+.\obj\pmprocs.obj(pmprocs.cc) :  error L2029: 'strcpy' : unresolved external
+.\obj\pmmain.obj(pmmain.cc) :  error L2029: 'strcpy' : unresolved external
+.\obj\playfield.obj(playfield.cc) :  error L2029: 'ostream::operator<<(const char*)' : unresolved external
+.\obj\tile.obj(tile.cc) :  error L2029: 'ostream::operator<<(const char*)' : unresolved external
+.\obj\makengine.obj(makengine.cc) :  error L2029: '_fltused' : unresolved external
+.\obj\GpiEngine.obj(gpiengine.cc) :  error L2029: '_fltused' : unresolved external
+.\obj\pmmain.obj(pmmain.cc) :  error L2029: '_fltused' : unresolved external
+.\obj\mmpm2sound.obj(mmpm2sound.cc) :  error L2029: '_fltused' : unresolved external
+.\obj\backtile.obj(backtile.cc) :  error L2029: '_fltused' : unresolved external
+.\obj\ghost.obj(ghost.cc) :  error L2029: '_fltused' : unresolved external
+.\obj\makman.obj(makman.cc) :  error L2029: '_fltused' : unresolved external
+.\obj\sprite.obj(sprite.cc) :  error L2029: '_fltused' : unresolved external
+.\obj\playfield.obj(playfield.cc) :  error L2029: '_fltused' : unresolved external
+.\obj\tile.obj(tile.cc) :  error L2029: '_fltused' : unresolved external
+.\obj\makengine.obj(makengine.cc) :  error L2029: 'operator delete(void*)' : unresolved external
+.\obj\GpiEngine.obj(gpiengine.cc) :  error L2029: 'operator delete(void*)' : unresolved external
+.\obj\diveengine.obj(diveengine.cc) :  error L2029: 'operator delete(void*)' : unresolved external
+.\obj\pmmain.obj(pmmain.cc) :  error L2029: 'operator delete(void*)' : unresolved external
+.\obj\mmpm2sound.obj(mmpm2sound.cc) :  error L2029: 'operator delete(void*)' : unresolved external
+.\obj\backtile.obj(backtile.cc) :  error L2029: 'operator delete(void*)' : unresolved external
+.\obj\ghost.obj(ghost.cc) :  error L2029: 'operator delete(void*)' : unresolved external
+.\obj\makman.obj(makman.cc) :  error L2029: 'operator delete(void*)' : unresolved external
+.\obj\sprite.obj(sprite.cc) :  error L2029: 'operator delete(void*)' : unresolved external
+.\obj\playfield.obj(playfield.cc) :  error L2029: 'operator delete(void*)' : unresolved external
+.\obj\tile.obj(tile.cc) :  error L2029: 'operator delete(void*)' : unresolved external
+.\obj\pmmain.obj(pmmain.cc) :  error L2029: '_exeentry' : unresolved external
+.\obj\makengine.obj(makengine.cc) :  error L2029: 'operator new(unsigned int)' : unresolved external
+.\obj\pmmain.obj(pmmain.cc) :  error L2029: 'operator new(unsigned int)' : unresolved external
+.\obj\playfield.obj(playfield.cc) :  error L2029: 'operator new(unsigned int)' : unresolved external
+.\obj\GpiEngine.obj(gpiengine.cc) :  error L2029: 'operator new[](unsigned int)' : unresolved external
+.\obj\diveengine.obj(diveengine.cc) :  error L2029: 'operator new[](unsigned int)' : unresolved external
+.\obj\backtile.obj(backtile.cc) :  error L2029: 'operator new[](unsigned int)' : unresolved external
+.\obj\sprite.obj(sprite.cc) :  error L2029: 'operator new[](unsigned int)' : unresolved external
+.\obj\GpiEngine.obj(gpiengine.cc) :  error L2029: 'operator delete[](void*)' : unresolved external
+.\obj\diveengine.obj(diveengine.cc) :  error L2029: 'operator delete[](void*)' : unresolved external
+.\obj\backtile.obj(backtile.cc) :  error L2029: 'operator delete[](void*)' : unresolved external
+.\obj\sprite.obj(sprite.cc) :  error L2029: 'operator delete[](void*)' : unresolved external
+.\obj\diveengine.obj(diveengine.cc) :  error L2029: '__PureVirtualCalled' : unresolved external

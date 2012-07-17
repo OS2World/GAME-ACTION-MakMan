@@ -1,0 +1,104 @@
+# Makefile for MakMan/2
+
+# Macros used
+
+# Base directory for files
+BASEDIR = .
+
+# Borland C base directory
+CDIR    = e:\apps\bc
+
+# and Warp Toolkit directory
+TOOL    = e:\toolkit
+
+# Subdirectories...
+OBJS   = $(BASEDIR)\obj
+SRCS   = $(BASEDIR)
+WORK   = $(BASEDIR)
+RCS    = $(BASEDIR)\rc
+INC    = $(BASEDIR)\;$(CDIR)\include;$(CDIR)\classlib\include;e:\apps\watchcat;$(TOOL)\h;
+HEADS  = $(BASEDIR)\inc
+LIB    = $(CDIR)\lib
+LINK   = tlink
+CC     = bcc
+RC     = rc
+CFLAGS = -P -v -C -DDEBUG 
+
+# make utility directives
+.autodepend
+.silent
+
+# Path for object files
+.path.obj obj = $(OBJS)
+
+
+#
+# =========================
+# =========================
+
+makman.exe : tile.obj    playfield.obj  sprite.obj  makman.obj  ghost.obj  backtile.obj  \
+             makengine.obj \
+             pmmain.obj  pmhelp.obj  pmvars.obj     pmprocs.obj pmvars.obj VideoEngine.obj\
+             makman.res
+
+  $(LINK)  -aa -Toe -v -m -s @&&!
+$(LIB)\c02      $(OBJS)\tile   $(OBJS)\playfield $(OBJS)\sprite \
+$(OBJS)\makman  $(OBJS)\ghost  $(OBJS)\backtile \
+$(OBJS)\pmmain  $(OBJS)\pmhelp $(OBJS)\pmprocs  $(OBJS)\pmvars $(OBJS)\videoengine \
+$(OBJS)\makengine.obj
+makman.exe
+
+$(TOOL)\lib\os2386 $(TOOL)\lib\mmpm2 $(LIB)\C2MT 
+
+!
+ $(RC) makman.res makman.exe
+    
+
+#
+# ========================
+# Compilation instructions
+# ========================
+.cc.obj :
+    $(CC) -c $(CFLAGS) -I$(INC) -o$(OBJS)\$*.obj $<
+
+.ipf.hlp:
+        ipfc $*.ipf /W3
+
+.itl.hlp:
+        bcc  -P $*.itl
+        ipfc $*.i
+        del $*.i
+
+.rc.res:
+        $(RC) -r $*.rc
+
+#
+# ========================
+# Clean Up
+# ========================
+clean :
+    del $(OBJS)\* /y
+    del makman.exe
+
+#
+# =================
+# File dependencies
+# =================
+direct.obj      : direct.cc
+main.obj        : main.cc
+tile.obj        : tile.cc
+backtile.obj    : backtile.cc
+playfield.obj   : playfield.cc
+sprite.obj      : sprite.cc
+makman.obj      : makman.cc
+ghost.obj       : ghost.cc
+pmmain.obj      : pmmain.cc
+pmhelp.obj      : pmhelp.cc
+pmvars.obj      : pmvars.cc
+pmprocs.obj     : pmprocs.cc
+makengine.obj   : makengine.cc
+videoengine.obj : videoengine.cc
+makman.res      : makman.rc
+
+
+

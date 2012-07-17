@@ -1,0 +1,17 @@
+
+DLGTEMPLATE IDD_ABOUTBOX
+BEGIN
+    DIALOG "Product Information", IDD_ABOUTBOX, 44, 29, 276, 137, FS_NOBYTEALIGN |
+WS_VISIBLE, FCF_SYSMENU | FCF_TITLEBAR
+	BEGIN
+		CTEXT "(C) Copyright Markellos J. Diorinos 1995. All rights preserved.", 256, 7, 54, 255, 8
+		CTEXT "msdiorin@immd9.informatik.uni-erlangen.de", 258, 7, 44, 255, 8
+		CTEXT "N. Plastira 19, GR 542 50 Thessaloniki, Greece", 257, 7, 34, 255, 8
+		DEFPUSHBUTTON "~OK", DID_OK, 111, 8, 45, 15
+		CONTROL "MakMan/2", 101, 15, 114, 118, 17, WC_STATIC, SS_TEXT | DT_LEFT | DT_TOP | DT_MNEMONIC | WS_VISIBLE | WS_GROUP
+		PRESPARAMS PP_FONTNAMESIZE "24.Helvetica"
+        PRESPARAMS PP_FOREGROUNDCOLOR , 0xff0000L
+		CONTROL "The ultimative PacMan for OS/2", 102, 14, 104, 198, 8, WC_STATIC, SS_TEXT | DT_LEFT | DT_TOP | DT_MNEMONIC | WS_VISIBLE | WS_GROUP
+	END
+
+END

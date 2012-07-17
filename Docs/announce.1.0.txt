@@ -1,0 +1,22 @@
+UPDATED OS/2 GAME : MakMan/2 v1.0
+
+MakMan/2 is a full color, full sound, fully intergrated P*cman close for OS/2.
+
+The game features :
+    18 levels with 9 different designs
+    3 different sprite sets with the ability to design your own
+    MMPM/2 sound
+    Highscore tracking
+    Joystick support (IBM driver required)
+    DIVE and PM support
+
+and requires :
+    at least 800x600 resolution
+    0.75 MB of disk space
+
+MakMan/2 is shareware with a registration fee of $15 (DM 20,-). Credit card
+registration is also available via BMT micro.
+
+Markellos J. Diorinos
+msdiorin@immd9.informatik.uni-erlangen.de
+

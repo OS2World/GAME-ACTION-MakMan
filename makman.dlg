@@ -1,0 +1,45 @@
+#ifndef OS2_INCLUDED
+   #include <os2.h>
+#endif
+
+DLGTEMPLATE 1002 LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "Hall of Shame entry!", 1002, 41, 68, 250, 94, WS_VISIBLE, 
+            FCF_SYSMENU | FCF_TITLEBAR
+    BEGIN
+        LTEXT           "Congratulations!", 101, 4, 76, 124, 14
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00FF0000L
+                        PRESPARAMS PP_FONTNAMESIZE, "20.Helvetica"
+        LTEXT           "You made it into the hall of shame, the top 10 perf"
+                        "orming", 102, 4, 60, 243, 8
+        LTEXT           "users who waste their time with MakMan/2 on this ma"
+                        "chine!", 103, 5, 51, 241, 8
+        LTEXT           "Enter your name:", 104, 4, 31, 73, 8
+        ENTRYFIELD      "", 1003, 84, 32, 157, 8, ES_MARGIN
+        PUSHBUTTON      "I'm so ashamed", DID_CANCEL, 43, 5, 75, 14
+        DEFPUSHBUTTON   "I'm so proud!", DID_OK, 124, 5, 93, 14
+    END
+END
+
+DLGTEMPLATE 1001 LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "Product Information", 1001, 44, 29, 276, 137, FS_NOBYTEALIGN | 
+            WS_VISIBLE, FCF_SYSMENU | FCF_TITLEBAR
+    BEGIN
+        CTEXT           "(C) Copyright Markellos J. Diorinos 1996. All right"
+                        "s preserved.", 256, 7, 54, 255, 8
+        CTEXT           "msdiorin@immd9.informatik.uni-erlangen.de", 258, 7, 
+                        44, 255, 8
+        CTEXT           "N. Plastira 19, GR 542 50 Thessaloniki, Greece", 
+                        257, 7, 34, 255, 8
+        DEFPUSHBUTTON   "~OK", DID_OK, 111, 8, 45, 15
+        LTEXT           "MakMan/2", -1, 15, 114, 118, 17, DT_MNEMONIC
+                        PRESPARAMS PP_FONTNAMESIZE, "24.Helvetica"
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00FF0000L
+        LTEXT           "The ultimative PacMan for OS/2", 102, 14, 104, 198, 
+                        8, DT_MNEMONIC
+        LTEXT           "Registered version to the Toronto OS/2 User Group", 
+                        1003, 14, 91, 252, 8
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00FF0000L
+    END
+END

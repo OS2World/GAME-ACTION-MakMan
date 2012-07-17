@@ -1,0 +1,85 @@
+
+#include "PmMain.hpp"
+#include "PmIDs.hpp"
+
+ICON   IDR_MAIN   "tiles\\makman.ico"
+BITMAP IDB_BACK_1 "tiles\\oml.bmp"
+
+
+ACCELTABLE IDR_MAIN PRELOAD
+{
+    VK_F2, IDM_NEW,   VIRTUALKEY
+    VK_F3, IDM_EXIT,  VIRTUALKEY
+}
+
+MENU IDR_MAIN PRELOAD
+BEGIN
+
+    SUBMENU "~Game",        IDM_GAME
+    BEGIN
+        MenuItem "~New\tF2",    IDM_NEW
+        MenuItem "E~xit\tF3",   IDM_EXIT
+    END
+
+    SUBMENU "~Options",     IDM_OPTIONS
+    BEGIN
+        SUBMENU "~Tile Set", IDM_T
+        BEGIN
+            MenuItem "~Classic",  IDM_T_CLASSIC
+            MenuItem "~3D Look",  IDM_T_3D
+            MenuItem "~Fufitos",  IDM_T_NEWLOOK
+        END
+        SUBMENU "~Controls", IDM_CONTROLS
+        BEGIN
+            MenuItem "~Keyboard", IDM_KEYBOARD
+            MenuItem "Joystick ~A", IDM_JOY_A
+            MenuItem "Joystick ~B", IDM_JOY_B
+	    SUBMENU  "~Calibrate", IDM_CALIBRATE
+	    BEGIN
+	            MenuItem "Joystick ~A", IDM_CAL_A
+        	    MenuItem "Joystick ~B", IDM_CAL_B
+	    END
+        END
+	SUBMENU "~Sound", IDM_SOUND
+	BEGIN
+	    MenuItem "~On",  IDM_SOUND_ON
+	    MenuItem "O~ff", IDM_SOUND_OFF
+	END
+	SUBMENU "~Priority", IDM_PRI
+	BEGIN
+	    MenuItem "~Normal"    , IDM_PRI_NORMAL
+	    MenuItem "~Critical"  , IDM_PRI_CRIT
+	    MenuItem "~Server",     IDM_PRI_SERVER
+	END	
+    END
+
+
+
+    SUBMENU "~Help",                           IDM_HELP,            MIS_TEXT
+    BEGIN
+        MENUITEM "Help ~index",                IDM_HELPINDEX,       MIS_TEXT
+        MENUITEM "~General help",              IDM_HELPEXTENDED,    MIS_TEXT
+        MENUITEM "~Using help",                IDM_HELPHELPFORHELP, MIS_TEXT
+        MENUITEM     SEPARATOR
+        MENUITEM "~Product information",       IDM_HELPABOUT,       MIS_TEXT
+    END
+END
+
+
+STRINGTABLE PRELOAD
+{
+    IDS_TITLEBAR          "MakMan/2"
+    IDS_ERRORTITLE        "MakMan/2 Error"
+    IDS_ERRORMSG          "%s encountered in file %s line %ld"
+    IDS_ERROR_OUTOFMEMORY "Error - out of memory!"
+    IDS_UNKNOWNMSG        "Unknown Error encounted in file %s line %ld"
+    IDS_CANNOTLOADSTRING  "Can't load string from resource file"
+    IDS_ENGINEERROR       "Couldn't initialize MakMan Engine"
+    IDS_DIVETOOMANY       "There are too many application using DIVE allready!"
+    IDS_DIVENODRIVER      "DIVE driver (SMVDD.SYS) or equivalent hasn't been loaded"
+    IDS_DIVENODIRECT      "This system doesn't seem to support DIVE (maybe only 16 colors?)"
+}
+
+rcinclude "about.dlg"
+rcinclude "highscore.dlg"
+
