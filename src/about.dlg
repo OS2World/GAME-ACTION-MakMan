@@ -1,0 +1,17 @@
+
+DLGTEMPLATE IDD_ABOUTBOX
+BEGIN
+    DIALOG "About MakMan/2", IDD_ABOUTBOX, 44, 29, 276, 120, FS_NOBYTEALIGN |
+WS_VISIBLE, FCF_SYSMENU | FCF_TITLEBAR
+    BEGIN
+        CONTROL "MakMan/2", 101, 15, 96, 240, 17, WC_STATIC, SS_TEXT | DT_LEFT | DT_TOP | DT_MNEMONIC | WS_VISIBLE | WS_GROUP
+        PRESPARAMS PP_FONTNAMESIZE "24.Helvetica"
+        PRESPARAMS PP_FOREGROUNDCOLOR , 0xff0000L
+        CTEXT "The ultimative PacMan for OS/2",                       102, 14, 86, 248, 8
+        CTEXT "Version 1.1",                                           -1,  7, 72, 262, 8
+        CTEXT "(C) Copyright 1995 Markellos J. Diorinos",              -1,  7, 58, 262, 8
+        CTEXT "Open Watcom port 2026 by Martin Iturbide",              -1,  7, 44, 262, 8
+        CTEXT "Free software - GNU General Public License v3",         -1,  7, 32, 262, 8
+        DEFPUSHBUTTON "~OK", DID_OK, 111, 8, 45, 15
+    END
+END

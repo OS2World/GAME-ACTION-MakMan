@@ -1,0 +1,42 @@
+MakMan/2 for OS/2 - Changelog
+==============================
+
+
+Version 1.1 (2026-09-10)
+--------------------------
+- Open Watcom C/C++ port (wpp386/wmake/wrc); src/, bin/, doc/ folder structure
+- Menu restructured: Game / Options / Help following project standard
+- Keyboard accelerators added: Ctrl+N (New), Ctrl+P (Pause), Ctrl+Q (Quit),
+  Ctrl+X (Exit), Ctrl+B (Background Run), Ctrl+F (Frame Controls)
+- Pause Game menu item with checkmark toggling via Ctrl+P
+- Quit Game menu item to stop current game without exiting
+- Language submenu added: English, Espanol, Nederlands, Deutsch, Francais, Italiano
+  Runtime language switching via 6-language string table (lang.h)
+- Save Settings on Exit option with INI persistence for Language and SaveOnExit
+- Background Run toggle (Ctrl+B): when OFF, game pauses on focus loss
+- Frame Controls toggle (Ctrl+F): hides/shows title bar and menu bar
+- Window positioned centered at game-native size on startup
+- BLDLEVEL string embedded in executable (version 1.1)
+- About dialog updated: version 1.1, Open Watcom build 2026
+- Menu IDs renumbered: Game 100-199, Options 200-299, Language 300-399,
+  Help 900-999, Submenu cascade IDs 1000-1099
+- STACKSIZE increased to 65536 in makman.def
+- makefile.wat and compile-wat.cmd added
+- doc/Readme.txt and doc/Changelog.txt added
+- Online help in six languages (IPF, built with wipfc into bin\help\MakMan_xx.hlp,
+  next to makman.exe); Help menu items enabled (index, general help, using help),
+  F1 and menu-item help; help follows the Language option
+- Save Settings on Exit is now enabled by default
+- Released under the GNU GPL version 3 (doc\License.txt); About box updated;
+  announce.1.0.txt and readme.src merged into doceadme.txt
+
+
+Version 1.00 (1995)
+--------------------
+- Original release by Markellos J. Diorinos
+- PacMan clone for OS/2 using DIVE and GPI rendering engines
+- MMPM/2 sound support
+- Joystick support (GAME$ driver)
+- Three tile sets: Classic, 3D Look, Fufitos
+- High score table with 15 entries persisted to MAKMAN.INI
+- IBM VisualAge C++ build

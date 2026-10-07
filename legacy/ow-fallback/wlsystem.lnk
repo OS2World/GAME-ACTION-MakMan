@@ -1,0 +1,22 @@
+# Open Watcom Linker System Definitions - minimal for OS/2 PM builds
+
+system begin os2v2
+    option osname='OS/2 32-bit'
+    libpath %WATCOM%/lib386/os2
+    libpath %WATCOM%/lib386
+    format os2 lx
+end
+
+system begin os2v2 pm
+    option osname='OS/2 32-bit'
+    libpath %WATCOM%/lib386/os2
+    libpath %WATCOM%/lib386
+    format os2 lx pm
+end
+
+system begin os2v2 dll
+    option osname='OS/2 32-bit'
+    libpath %WATCOM%/lib386/os2
+    libpath %WATCOM%/lib386
+    format os2 lx dll
+end

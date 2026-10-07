@@ -1,0 +1,167 @@
+
+#define INCL_WIN
+#define INCL_WINSYS
+#define INCL_WINMENUS
+#define INCL_WINDIALOGS
+#include <os2.h>
+#include "PmIDs.hpp"
+
+ICON   IDR_MAIN   "src\\makman.ico"
+BITMAP IDB_BACK_1 "tiles\\oml.bmp"
+
+
+ACCELTABLE IDR_MAIN PRELOAD
+{
+    "n", IDM_NEW,       CONTROL
+    "N", IDM_NEW,       CONTROL
+    "p", IDM_PAUSE,     CONTROL
+    "P", IDM_PAUSE,     CONTROL
+    "q", IDM_QUIT_GAME, CONTROL
+    "Q", IDM_QUIT_GAME, CONTROL
+    "x", IDM_EXIT,      CONTROL
+    "X", IDM_EXIT,      CONTROL
+    "b", IDM_BACKGRND,  CONTROL
+    "B", IDM_BACKGRND,  CONTROL
+    "f", IDM_FRAME,     CONTROL
+    "F", IDM_FRAME,     CONTROL
+}
+
+MENU IDR_MAIN PRELOAD
+BEGIN
+
+    SUBMENU "~Game",        IDM_SUBMENU_GAME
+    BEGIN
+        MenuItem "~New\tCtrl+N",          IDM_NEW
+        MenuItem "~Pause Game\tCtrl+P",   IDM_PAUSE,     MIS_TEXT, MIA_DISABLED
+        MENUITEM SEPARATOR
+        MenuItem "~Quit Game\tCtrl+Q",    IDM_QUIT_GAME, MIS_TEXT, MIA_DISABLED
+        MenuItem "E~xit\tCtrl+X",         IDM_EXIT
+    END
+
+    SUBMENU "~Options",     IDM_SUBMENU_OPTS
+    BEGIN
+        SUBMENU "~Tile Set", IDM_SUBMENU_TILESET
+        BEGIN
+            MenuItem "~Classic",  IDM_T_CLASSIC
+            MenuItem "~3D Look",  IDM_T_3D
+            MenuItem "~Fufitos",  IDM_T_NEWLOOK
+        END
+        SUBMENU "~Controls", IDM_SUBMENU_CONTROLS
+        BEGIN
+            MenuItem "~Keyboard",   IDM_KEYBOARD
+            MenuItem "Joystick ~A", IDM_JOY_A
+            MenuItem "Joystick ~B", IDM_JOY_B
+            SUBMENU  "~Calibrate",  IDM_SUBMENU_CAL
+            BEGIN
+                MenuItem "Joystick ~A", IDM_CAL_A
+                MenuItem "Joystick ~B", IDM_CAL_B
+            END
+        END
+        SUBMENU "~Sound", IDM_SUBMENU_SOUND
+        BEGIN
+            MenuItem "~On",  IDM_SOUND_ON
+            MenuItem "O~ff", IDM_SOUND_OFF
+        END
+        SUBMENU "~Priority", IDM_SUBMENU_PRI
+        BEGIN
+            MenuItem "~Normal",   IDM_PRI_NORMAL
+            MenuItem "~Critical", IDM_PRI_CRIT
+            MenuItem "~Server",   IDM_PRI_SERVER
+        END
+        SUBMENU "~Language", IDM_SUBMENU_LANG
+        BEGIN
+            MenuItem "~English",    IDM_LANG_EN
+            MenuItem "~Espanol",    IDM_LANG_ES
+            MenuItem "~Nederlands", IDM_LANG_NL
+            MenuItem "~Deutsch",    IDM_LANG_DE
+            MenuItem "~Francais",   IDM_LANG_FR
+            MenuItem "~Italiano",   IDM_LANG_IT
+        END
+        MENUITEM SEPARATOR
+        MenuItem "~Background Run\tCtrl+B",  IDM_BACKGRND
+        MenuItem "~Frame Controls\tCtrl+F",  IDM_FRAME
+        MENUITEM SEPARATOR
+        MenuItem "~Save Settings on Exit",   IDM_SAVEONEXIT, MIS_TEXT, MIA_CHECKED
+    END
+
+    SUBMENU "~Help", IDM_SUBMENU_HELP
+    BEGIN
+        MENUITEM "Help ~index",        IDM_HELPINDEX,       MIS_TEXT
+        MENUITEM "~General help",      IDM_HELPEXTENDED,    MIS_TEXT
+        MENUITEM "~Using help",        IDM_HELPHELPFORHELP, MIS_TEXT
+        MENUITEM SEPARATOR
+        MENUITEM "~About MakMan/2...", IDM_HELPABOUT,       MIS_TEXT
+    END
+END
+
+
+STRINGTABLE PRELOAD
+{
+    IDS_TITLEBAR          "MakMan/2"
+    IDS_ERRORTITLE        "MakMan/2 Error"
+    IDS_ERRORMSG          "%s encountered in file %s line %ld"
+    IDS_ERROR_OUTOFMEMORY "Error - out of memory!"
+    IDS_UNKNOWNMSG        "Unknown Error encountered in file %s line %ld"
+    IDS_CANNOTLOADSTRING  "Can't load string from resource file"
+    IDS_ENGINEERROR       "Couldn't initialize MakMan Engine"
+    IDS_DIVETOOMANY       "There are too many applications using DIVE already!"
+    IDS_DIVENODRIVER      "DIVE driver (SMVDD.SYS) or equivalent hasn't been loaded"
+    IDS_DIVENODIRECT      "This system doesn't seem to support DIVE (maybe only 16 colors?)"
+}
+
+HELPTABLE MAIN_HELP_TABLE
+BEGIN
+    HELPITEM IDR_MAIN,     SUBTABLE_MAIN,  PANEL_INTRO
+    HELPITEM IDD_ABOUTBOX, SUBTABLE_ABOUT, PANEL_COPYRIGHT
+END
+
+HELPSUBTABLE SUBTABLE_MAIN
+BEGIN
+    HELPSUBITEM IDM_SUBMENU_GAME,      PANEL_GAMEMENU
+    HELPSUBITEM IDM_NEW,               PANEL_GAMEMENU
+    HELPSUBITEM IDM_PAUSE,             PANEL_GAMEMENU
+    HELPSUBITEM IDM_QUIT_GAME,         PANEL_GAMEMENU
+    HELPSUBITEM IDM_EXIT,              PANEL_GAMEMENU
+    HELPSUBITEM IDM_SUBMENU_OPTS,      PANEL_OPTMENU
+    HELPSUBITEM IDM_SUBMENU_TILESET,   PANEL_OPTMENU
+    HELPSUBITEM IDM_T_CLASSIC,         PANEL_OPTMENU
+    HELPSUBITEM IDM_T_3D,              PANEL_OPTMENU
+    HELPSUBITEM IDM_T_NEWLOOK,         PANEL_OPTMENU
+    HELPSUBITEM IDM_SUBMENU_CONTROLS,  PANEL_CONTROLS
+    HELPSUBITEM IDM_KEYBOARD,          PANEL_CONTROLS
+    HELPSUBITEM IDM_JOY_A,             PANEL_CONTROLS
+    HELPSUBITEM IDM_JOY_B,             PANEL_CONTROLS
+    HELPSUBITEM IDM_SUBMENU_CAL,       PANEL_CONTROLS
+    HELPSUBITEM IDM_CAL_A,             PANEL_CONTROLS
+    HELPSUBITEM IDM_CAL_B,             PANEL_CONTROLS
+    HELPSUBITEM IDM_SUBMENU_SOUND,     PANEL_OPTMENU
+    HELPSUBITEM IDM_SOUND_ON,          PANEL_OPTMENU
+    HELPSUBITEM IDM_SOUND_OFF,         PANEL_OPTMENU
+    HELPSUBITEM IDM_SUBMENU_PRI,       PANEL_OPTMENU
+    HELPSUBITEM IDM_PRI_NORMAL,        PANEL_OPTMENU
+    HELPSUBITEM IDM_PRI_CRIT,          PANEL_OPTMENU
+    HELPSUBITEM IDM_PRI_SERVER,        PANEL_OPTMENU
+    HELPSUBITEM IDM_SUBMENU_LANG,      PANEL_OPTMENU
+    HELPSUBITEM IDM_LANG_EN,           PANEL_OPTMENU
+    HELPSUBITEM IDM_LANG_ES,           PANEL_OPTMENU
+    HELPSUBITEM IDM_LANG_NL,           PANEL_OPTMENU
+    HELPSUBITEM IDM_LANG_DE,           PANEL_OPTMENU
+    HELPSUBITEM IDM_LANG_FR,           PANEL_OPTMENU
+    HELPSUBITEM IDM_LANG_IT,           PANEL_OPTMENU
+    HELPSUBITEM IDM_BACKGRND,          PANEL_OPTMENU
+    HELPSUBITEM IDM_FRAME,             PANEL_OPTMENU
+    HELPSUBITEM IDM_SAVEONEXIT,        PANEL_OPTMENU
+    HELPSUBITEM IDM_SUBMENU_HELP,      PANEL_HELPMENU
+    HELPSUBITEM IDM_HELPINDEX,         PANEL_HELPMENU
+    HELPSUBITEM IDM_HELPEXTENDED,      PANEL_HELPMENU
+    HELPSUBITEM IDM_HELPHELPFORHELP,   PANEL_HELPMENU
+    HELPSUBITEM IDM_HELPABOUT,         PANEL_COPYRIGHT
+END
+
+HELPSUBTABLE SUBTABLE_ABOUT
+BEGIN
+    HELPSUBITEM DID_OK, PANEL_COPYRIGHT
+END
+
+#include "about.dlg"
+#include "highscore.dlg"

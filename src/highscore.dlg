@@ -1,0 +1,18 @@
+DLGTEMPLATE IDD_HIGHSCORE LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "Hall of Shame entry!", 100, 41, 68, 250, 94, WS_VISIBLE, 
+            FCF_SYSMENU | FCF_TITLEBAR
+    BEGIN
+        LTEXT           "Congratulations!", 101, 4, 76, 124, 14
+                        PRESPARAMS PP_FOREGROUNDCOLOR, 0x00FF0000L
+                        PRESPARAMS PP_FONTNAMESIZE, "20.Helvetica"
+        LTEXT           "You made it into the hall of shame, the top 10 perf"
+                        "orming", 102, 4, 60, 243, 8
+        LTEXT           "users who waste their time with MakMan/2 on this ma"
+                        "chine!", 103, 5, 51, 241, 8
+        LTEXT           "Enter your name:", 104, 4, 31, 73, 8
+        ENTRYFIELD      "", DID_HIGHNAME, 84, 32, 157, 8, ES_MARGIN
+        PUSHBUTTON      "I'm so ashamed", DID_CANCEL, 43, 5, 75, 14
+        DEFPUSHBUTTON   "I'm so proud!", DID_OK, 124, 5, 93, 14
+    END
+END
