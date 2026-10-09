@@ -6,6 +6,8 @@ Originally written in 1995 by Markellos J. Diorinos. This version is an
 Open Watcom port with enhanced menus, keyboard shortcuts, 6-language
 support, and settings persistence.
 
+![MakMan ScreenShot](/doc/MakMan.png)
+
 ## Controls
 
 | Input | Action |
