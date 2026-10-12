@@ -46,17 +46,7 @@ BEGIN
             MenuItem "~3D Look",  IDM_T_3D
             MenuItem "~Fufitos",  IDM_T_NEWLOOK
         END
-        SUBMENU "~Controls", IDM_SUBMENU_CONTROLS
-        BEGIN
-            MenuItem "~Keyboard",   IDM_KEYBOARD
-            MenuItem "Joystick ~A", IDM_JOY_A
-            MenuItem "Joystick ~B", IDM_JOY_B
-            SUBMENU  "~Calibrate",  IDM_SUBMENU_CAL
-            BEGIN
-                MenuItem "Joystick ~A", IDM_CAL_A
-                MenuItem "Joystick ~B", IDM_CAL_B
-            END
-        END
+        MenuItem "~Key Mapping...", IDM_KEYMAPPING
         SUBMENU "~Sound", IDM_SUBMENU_SOUND
         BEGIN
             MenuItem "~On",  IDM_SOUND_ON
@@ -127,13 +117,7 @@ BEGIN
     HELPSUBITEM IDM_T_CLASSIC,         PANEL_OPTMENU
     HELPSUBITEM IDM_T_3D,              PANEL_OPTMENU
     HELPSUBITEM IDM_T_NEWLOOK,         PANEL_OPTMENU
-    HELPSUBITEM IDM_SUBMENU_CONTROLS,  PANEL_CONTROLS
-    HELPSUBITEM IDM_KEYBOARD,          PANEL_CONTROLS
-    HELPSUBITEM IDM_JOY_A,             PANEL_CONTROLS
-    HELPSUBITEM IDM_JOY_B,             PANEL_CONTROLS
-    HELPSUBITEM IDM_SUBMENU_CAL,       PANEL_CONTROLS
-    HELPSUBITEM IDM_CAL_A,             PANEL_CONTROLS
-    HELPSUBITEM IDM_CAL_B,             PANEL_CONTROLS
+    HELPSUBITEM IDM_KEYMAPPING,        PANEL_CONTROLS
     HELPSUBITEM IDM_SUBMENU_SOUND,     PANEL_OPTMENU
     HELPSUBITEM IDM_SOUND_ON,          PANEL_OPTMENU
     HELPSUBITEM IDM_SOUND_OFF,         PANEL_OPTMENU
@@ -165,3 +149,4 @@ END
 
 #include "about.dlg"
 #include "highscore.dlg"
+#include "keymap.dlg"

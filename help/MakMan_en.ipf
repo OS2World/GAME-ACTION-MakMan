@@ -42,7 +42,7 @@ More information&colon.
 :h1 res=2102.Controls
 :i1.Controls
 :p.
-With the keyboard, the arrow keys left, right, up and down move MakMan. To use a joystick, choose Joystick A or Joystick B in Options - Controls; you can also calibrate it there. While a joystick is active, the keyboard does not steer MakMan.
+By default the arrow keys left, right, up and down move MakMan. Options - Key Mapping... opens a window where you choose the key for each direction (Keyboard page) and set up a joystick (Joystick page)&colon. tick Enable Joystick, choose Joystick A or B, give each direction a joystick button or a stick direction, and use Calibrate A / B to set the centre of the stick. The keyboard and the joystick work together. The mapping is saved with the other settings.
 :p.
 :dl break=all.
 :dt.Arrow keys
@@ -96,14 +96,14 @@ With the keyboard, the arrow keys left, right, up and down move MakMan. To use a
 :dl break=all.
 :dt.Tile Set
 :dd.Chooses the graphics of the maze and the characters&colon. Classic, 3D Look or Fufitos. The tile set can only be changed while no game is running.
-:dt.Controls
-:dd.Chooses Keyboard or a joystick (Joystick A or B), and calibrates a joystick.
+:dt.Key Mapping
+:dd.Opens the Key Mapping window&colon. keys for the four directions, joystick choice, buttons and calibration.
 :dt.Sound
 :dd.Switches the sound effects on or off.
 :dt.Priority
 :dd.Sets the priority of the game (Normal, Critical or Server). Use Critical or Server only if the game runs unevenly on a busy system.
 :dt.Language
-:dd.Changes the language of the menus and of this help (English, Espanol, Nederlands, Deutsch, Francais, Italiano).
+:dd.Changes the language of the menus and dialogs. The languages are the files in the lang folder (English, Espanol, Nederlands, Deutsch, Francais, Italiano, Japanese, Chinese, Korean, Russian, Greek). This help exists in the first six; for the other languages the English help is shown.
 :dt.Background Run
 :dd.When switched off, the game pauses automatically when the window loses the focus.
 :dt.Frame Controls
@@ -136,12 +136,16 @@ MakMan/2 uses GPI graphics by default. A parameter on the command line selects t
 :dd.The same as above.
 :dt.makman dive
 :dd.DIVE graphics. Needs a DIVE-capable display driver.
+:dt.makman -plainmenus
+:dd.Menu items are never owner drawn; characters the code page lacks show as ?.
+:dt.makman -unicodemenus
+:dd.All menu items are drawn with Unicode text (normally only the items that need it).
 :edl.
 
 :h1 res=2108.Copyright
 :i1.Copyright
 :p.
-MakMan/2 version 1.1
+MakMan/2 version 1.3
 :p.
 Copyright (C) 1995 Markellos J. Diorinos. Open Watcom port and enhancements, 2026.
 :p.

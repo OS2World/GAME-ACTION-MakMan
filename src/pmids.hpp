@@ -49,6 +49,7 @@
 #define IDM_SAVEONEXIT       214
 #define IDM_BACKGRND         215
 #define IDM_FRAME            216
+#define IDM_KEYMAPPING      217
 
 // ---- Language menu: 300-399 ----
 #define IDM_LANG_EN          300
@@ -103,3 +104,25 @@
 #define DID_HIGHNAME        1003
 
 #define MSGBOXID             222
+
+// ---- Key Mapping dialog (keymap.dlg / keymap.cpp) ----
+#define DLG_KEYMAPPING      3000
+#define DLG_KM_KEYBOARD     3001
+#define DLG_KM_JOYSTICK     3002
+#define IDC_KM_NOTEBOOK     3010
+#define IDC_KM_KH1          3020
+#define IDC_KM_KH2          3021
+#define IDC_KM_KL1          3030    /* +0..3 labels of the keyboard page   */
+#define IDC_KM_KBD1         3040    /* +0..3 boxes                         */
+#define IDC_KM_JOY_EN       3050
+#define IDC_KM_JOY_A        3051
+#define IDC_KM_JOY_B        3052
+#define IDC_KM_JEN_L        3053
+#define IDC_KM_JA_L         3054
+#define IDC_KM_JB_L         3055
+#define IDC_KM_JH1          3056
+#define IDC_KM_JH2          3057
+#define IDC_KM_JL1          3060    /* +0..3 labels of the joystick page   */
+#define IDC_KM_JBTN1        3070    /* +0..3 boxes                         */
+#define IDC_KM_CAL          3080
+#define IDC_KM_CALB         3081

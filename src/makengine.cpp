@@ -31,6 +31,7 @@
 #include "makman.hpp"
 
 #include "joyos2.h"
+#include "keymap.hpp"
 
 //
 // Variables used for communication with the other thread.
@@ -325,36 +326,31 @@ int  Eng_ShowPlayfield( VOID )
 
 
 
-int  Eng_ProcessInput ( SHORT key )
+// Key or joystick action (ACT_LEFT .. ACT_DOWN, see keymap.hpp) -> the move MakMan makes
+VOID Eng_SetMove ( INT action )
 {
-
-  switch (key)  {
-  case VK_LEFT:
+  switch (action)  {
+  case ACT_LEFT:
     usrMove = move_left;
     break;
-  case VK_RIGHT:
+  case ACT_RIGHT:
     usrMove = move_right;
     break;
-  case VK_UP:
+  case ACT_UP:
     usrMove = move_up;
     break;
- case VK_DOWN:
+  case ACT_DOWN:
     usrMove = move_down;
     break;
-default:
+  default:
     break;
   }
-
-  return key;
 }
 
 void _System Eng_ThreadProc (ULONG)
 {
   // APIRET rc;
   ULONG  ulPostCt;
-  GAME_STATUS_STRUCT joyStatus;
-  ULONG  dataLen = sizeof(joyStatus);
-  GAME_2DPOS_STRUCT *joyData = &joyStatus.curdata.A;
 
   // clear any pending terminate requests
   DosResetEventSem((ULONG)hevTermGame, &ulPostCt);
@@ -374,37 +370,8 @@ void _System Eng_ThreadProc (ULONG)
       if (ulPostCt > 1)
         lostEvents += ulPostCt - 1;
 
-      // If i'm using a joystick, read joystick input
-      if (useJoystick)
-      {
-          DosDevIOCtl( hGame, IOCTL_CAT_USER, GAME_GET_STATUS,
-                  NULL, 0, NULL,
-                  &joyStatus, dataLen, &dataLen);
-          int joyX, joyY;
-          joyX = joyData[useJoystick-1].x - joyCal[useJoystick].x;
-          joyY = joyData[useJoystick-1].y - joyCal[useJoystick].y;
-
-          // a small tolerance to compensate for joystick drifting
-          int tolX = joyCal[useJoystick].x/10;
-          int tolY = joyCal[useJoystick].y/10;
-
-          // we're moving on the X axis or on the Y axis?
-          if ( abs(joyX) > abs(joyY) )
-          { // X axis
-              if (joyX > tolX)
-              usrMove = move_right;
-              if (joyX < -tolX)
-              usrMove = move_left;
-          }
-          else
-          { // Y axis
-              if (joyY > tolY)
-              usrMove = move_down;
-              if (joyY < -tolY)
-              usrMove = move_up;
-          }
-
-      } // joystick input
+      // If i'm using a joystick, read joystick input (see Options - Key Mapping)
+      KmJoyPoll();
 
       // keep the game going
       myGame = myfld->tick( usrMove );

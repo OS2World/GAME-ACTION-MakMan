@@ -27,6 +27,8 @@
 #include "pmids.hpp"
 #include "pmkeys.hpp"
 #include "lang.h"
+#include "unitext.hpp"
+#include "keymap.hpp"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -46,142 +48,11 @@
 
 #pragma off(unreferenced)
 static const char bldlevel[] =
-    "@#Markellos J. Diorinos:1.1#@##1## 10 Sep 2026 21:00:00      "
+    "@#Markellos J. Diorinos:1.3#@##1## 12 Oct 2026 21:00:00      "
     "ARCAOS:::0::::@@MakMan/2 - PacMan clone for OS/2\r\n\x1a";
 #pragma on(unreferenced)
 
 /* ---- language runtime table ---- */
-
-int current_lang = LANG_EN;
-
-const char *lang_strings[LANG_COUNT][STR_COUNT] = {
-    /* LANG_EN */
-    {
-        "~Game",                         "~New\tCtrl+N",
-        "~Pause Game\tCtrl+P",           "~Quit Game\tCtrl+Q",
-        "E~xit\tCtrl+X",                 "~Options",
-        "~Tile Set",                     "~Classic",
-        "~3D Look",                      "~Fufitos",
-        "~Controls",                     "~Keyboard",
-        "Joystick ~A",                   "Joystick ~B",
-        "Cali~brate",                    "Joystick ~A",
-        "Joystick ~B",                   "~Sound",
-        "~On",                           "O~ff",
-        "~Priority",                     "~Normal",
-        "~Critical",                     "~Server",
-        "~Language",                     "~Save Settings on Exit",
-        "~Background Run\tCtrl+B",       "~Frame Controls\tCtrl+F",
-        "~Help",                         "~About MakMan/2...",
-        "Help ~index", "~General help", "~Using help",
-        "MakMan/2 Help Window",
-        "The help file %s was not found.\nPlease put it in the help folder next to the program."
-    },
-    /* LANG_ES */
-    {
-        "~Juego",                        "~Nuevo\tCtrl+N",
-        "~Pausar Juego\tCtrl+P",         "~Terminar Juego\tCtrl+Q",
-        "Sa~lir\tCtrl+X",               "~Opciones",
-        "~Conjunto de Fichas",           "~Clasico",
-        "~3D",                           "~Fufitos",
-        "~Controles",                    "~Teclado",
-        "Joystick ~A",                   "Joystick ~B",
-        "~Calibrar",                     "Joystick ~A",
-        "Joystick ~B",                   "~Sonido",
-        "~Activar",                      "~Desactivar",
-        "~Prioridad",                    "~Normal",
-        "~Critica",                      "~Servidor",
-        "~Idioma",                       "~Guardar ajustes al salir",
-        "~Fondo Activo\tCtrl+B",         "~Controles Marco\tCtrl+F",
-        "~Ayuda",                        "~Acerca de MakMan/2...",
-        "~Indice de ayuda", "Ayuda ~general", "~Usar la ayuda",
-        "Ventana de Ayuda MakMan/2",
-        "No se encontro el archivo de ayuda %s.\nPongalo en la carpeta help junto al programa."
-    },
-    /* LANG_NL */
-    {
-        "~Spel",                         "~Nieuw\tCtrl+N",
-        "~Pauze Spel\tCtrl+P",           "~Spel Stoppen\tCtrl+Q",
-        "~Afsluiten\tCtrl+X",           "~Opties",
-        "~Tegelset",                     "~Klassiek",
-        "~3D-Stijl",                     "~Fufitos",
-        "~Besturing",                    "~Toetsenbord",
-        "Joystick ~A",                   "Joystick ~B",
-        "~Kalibreren",                   "Joystick ~A",
-        "Joystick ~B",                   "~Geluid",
-        "~Aan",                          "~Uit",
-        "~Prioriteit",                   "~Normaal",
-        "~Kritiek",                      "~Server",
-        "~Taal",                         "~Instellingen opslaan bij afsluiten",
-        "~Achtergrond Actief\tCtrl+B",   "~Raambediening\tCtrl+F",
-        "~Help",                         "~Over MakMan/2...",
-        "Help~index", "~Algemene help", "Help ~gebruiken",
-        "MakMan/2 Help Venster",
-        "Het helpbestand %s is niet gevonden.\nPlaats het in de map help naast het programma."
-    },
-    /* LANG_DE */
-    {
-        "~Spiel",                        "~Neu\tCtrl+N",
-        "~Pause\tCtrl+P",               "~Spiel Beenden\tCtrl+Q",
-        "~Beenden\tCtrl+X",             "~Optionen",
-        "~Kachelsatz",                   "~Klassisch",
-        "~3D-Stil",                      "~Fufitos",
-        "~Steuerung",                    "~Tastatur",
-        "Joystick ~A",                   "Joystick ~B",
-        "~Kalibrieren",                  "Joystick ~A",
-        "Joystick ~B",                   "~Sound",
-        "~Ein",                          "~Aus",
-        "~Prioritaet",                   "~Normal",
-        "~Kritisch",                     "~Server",
-        "~Sprache",                      "~Einstellungen beim Beenden speichern",
-        "~Hintergrundlauf\tCtrl+B",      "~Rahmenbedienung\tCtrl+F",
-        "~Hilfe",                        "~Ueber MakMan/2...",
-        "Hilfe~index", "~Allgemeine Hilfe", "Hilfe ~verwenden",
-        "MakMan/2 Hilfe Fenster",
-        "Die Hilfedatei %s wurde nicht gefunden.\nBitte in den Ordner help neben dem Programm legen."
-    },
-    /* LANG_FR */
-    {
-        "~Jeu",                          "~Nouveau\tCtrl+N",
-        "~Pause Jeu\tCtrl+P",           "~Quitter Jeu\tCtrl+Q",
-        "~Sortir\tCtrl+X",              "~Options",
-        "~Jeu de Carreaux",              "~Classique",
-        "~3D",                           "~Fufitos",
-        "~Controles",                    "~Clavier",
-        "Joystick ~A",                   "Joystick ~B",
-        "~Calibrer",                     "Joystick ~A",
-        "Joystick ~B",                   "~Son",
-        "~Activer",                      "~Desactiver",
-        "~Priorite",                     "~Normale",
-        "~Critique",                     "~Serveur",
-        "~Langue",                       "~Sauver les reglages a la sortie",
-        "~Arriere-plan Actif\tCtrl+B",   "~Controles Cadre\tCtrl+F",
-        "~Aide",                         "~A propos de MakMan/2...",
-        "~Index de l'aide", "Aide ~generale", "~Utiliser l'aide",
-        "Fenetre d'aide MakMan/2",
-        "Le fichier d'aide %s est introuvable.\nPlacez-le dans le dossier help a cote du programme."
-    },
-    /* LANG_IT */
-    {
-        "~Gioco",                        "~Nuovo\tCtrl+N",
-        "~Pausa Gioco\tCtrl+P",          "~Esci dal Gioco\tCtrl+Q",
-        "~Esci\tCtrl+X",                "~Opzioni",
-        "~Set di Tessere",               "~Classico",
-        "~3D",                           "~Fufitos",
-        "~Controlli",                    "~Tastiera",
-        "Joystick ~A",                   "Joystick ~B",
-        "~Calibra",                      "Joystick ~A",
-        "Joystick ~B",                   "~Suono",
-        "~Attiva",                       "~Disattiva",
-        "~Priorita",                     "~Normale",
-        "~Critico",                      "~Server",
-        "~Lingua",                       "~Salva impostazioni all'uscita",
-        "~Sfondo Attivo\tCtrl+B",        "~Controlli Cornice\tCtrl+F",
-        "~Guida",                        "~Informazioni su MakMan/2...",
-        "~Indice dell'aiuto", "Aiuto ~generale", "~Usare l'aiuto",
-        "Finestra Aiuto MakMan/2",
-        "Il file di aiuto %s non e stato trovato.\nMetterlo nella cartella help accanto al programma."
-    },
-};
 
 /* ---- frame controls and new feature globals ---- */
 HWND hwndTitleBar = NULLHANDLE;
@@ -216,6 +87,7 @@ int main(int argc, char* argv[])
 {
     QMSG  qmsg;
 
+
     if( Initialize(argc, argv))
     {
         while( WinGetMsg( habMain, &qmsg, NULLHANDLE, 0, 0))
@@ -245,6 +117,7 @@ int main(int argc, char* argv[])
 extern gfx *GfxEng;
 extern snd *SndEng;
 extern GAME_2DPOS_STRUCT joyCal[];
+extern int useJoystick;
 
 BOOL Initialize(int argc, char* argv[])
 {
@@ -265,8 +138,6 @@ BOOL Initialize(int argc, char* argv[])
 	fprintf(debOut, "MakMan/2 Init\n");
 	fflush(debOut);
     }
-
-    GetScoresFromIni();
 
     /*
      * create all semaphores for mutual exclusion and event timing
@@ -337,30 +208,43 @@ BOOL Initialize(int argc, char* argv[])
     //
     // Instantiate the Gfx Output engine
     //
-    if (argc == 2)
     {
-    strlwr(argv[1]); // make lower case
-	if (strcmp(argv[1], "gpi") == 0)
-        GfxEng = new gpi;
-    else
-        if (strcmp(argv[1], "dive") == 0)
-            GfxEng = new dive;
-            else {
-                char buf[200];
-                sprintf(buf, "Usage : MakMan [gpi | dive]\n"
-                             "Unknown option %s\n", argv[1]);
-                WinMessageBox(HWND_DESKTOP,
-                          hwndFrame,
-                          (PSZ) buf,
-                          (PSZ) szTitle,
-                          0,
-                          MB_MOVEABLE | MB_CUACRITICAL | MB_CANCEL );
-                return FALSE;
-            }
+        /* graphics mode: "gpi" (default) or "dive"; the switches -plainmenus and -unicodemenus
+           belong to the Unicode layer, see Uni_Init() */
+        int a, bad = 0;
+        const char *mode = "gpi";
 
+        for (a = 1; a < argc; a++)
+        {
+            strlwr(argv[a]);
+            if (argv[a][0] == '-')
+            {
+                if (strcmp(argv[a], "-plainmenus") && strcmp(argv[a], "-unicodemenus"))
+                    bad = a;
+            }
+            else if (strcmp(argv[a], "gpi") == 0 || strcmp(argv[a], "dive") == 0)
+                mode = argv[a];
+            else
+                bad = a;
+        }
+        if (bad)
+        {
+            char buf[200];
+            sprintf(buf, "Usage : MakMan [gpi | dive] [-plainmenus | -unicodemenus]\n"
+                         "Unknown option %s\n", argv[bad]);
+            WinMessageBox(HWND_DESKTOP,
+                      hwndFrame,
+                      (PSZ) buf,
+                      (PSZ) szTitle,
+                      0,
+                      MB_MOVEABLE | MB_CUACRITICAL | MB_CANCEL );
+            return FALSE;
+        }
+        if (strcmp(mode, "dive") == 0)
+            GfxEng = new dive;
+        else
+            GfxEng = new gpi;
     }
-    else
-        GfxEng = new gpi;
 
     SndEng = new mmpm2;
 
@@ -438,6 +322,12 @@ BOOL Initialize(int argc, char* argv[])
 
     hwndMenu = WinWindowFromID( hwndFrame, FID_MENU);
 
+    // language files, Unicode menus (must follow the creation of the menu)
+    Uni_Init(argc, argv);
+
+    // high scores (names are converted to UTF-8 with ULS, so after Uni_Init)
+    GetScoresFromIni();
+
 
     //
     // Disable unused menu entries
@@ -481,10 +371,6 @@ BOOL Initialize(int argc, char* argv[])
                 fflush(debOut);
             }
             DosClose(hGame);
-            EnableMenu(IDM_JOY_A, FALSE);
-            EnableMenu(IDM_JOY_B, FALSE);
-            EnableMenu(IDM_CAL_A, FALSE);
-            EnableMenu(IDM_CAL_B, FALSE);
             hGame = 0;
        }
         else
@@ -495,31 +381,6 @@ BOOL Initialize(int argc, char* argv[])
             {
                 fprintf(debOut, "JoyStat A: %i, B:%i\n", gameParms.useA, gameParms.useB);
                 fflush(debOut);
-            }
-
-           /*
-            * Keep only bits defined X and Y axis, they are bit 1 and bit 2
-            */
-           USHORT usTmp1 = gameParms.useA & GAME_USE_BOTH_NEWMASK;
-           USHORT usTmp2 = gameParms.useB & GAME_USE_BOTH_NEWMASK;
-
-            // No Joysticks
-            if (gameParms.useA == 0 && gameParms.useB == 0)
-            {
-                EnableMenu(IDM_JOY_A, FALSE);
-                EnableMenu(IDM_CAL_A, FALSE);
-                EnableMenu(IDM_JOY_B, FALSE);
-                EnableMenu(IDM_CAL_B, FALSE);
-            }
-
-            // One Joystick found
-            // if usTmp2 is not 0, then Joystick 1 is an extended
-            // type joystick (with 3 axes) but we don't care
-            if (usTmp1 == GAME_USE_BOTH_NEWMASK &&
-                usTmp2 != GAME_USE_BOTH_NEWMASK  )
-            {
-                EnableMenu(IDM_JOY_B, FALSE);
-                EnableMenu(IDM_CAL_B, FALSE);
             }
 
             // And now read the calibration values
@@ -707,6 +568,7 @@ VOID Finalize(VOID)
     dprint("Destroyed hPS\n");
 
     DestroyHelpInstance();
+    Uni_Done();
 
     if (hwndFrame)
         WinDestroyWindow( hwndFrame);
@@ -778,6 +640,8 @@ VOID WriteProfileInt ( char* key, int value )
 VOID GetOptionsFromIni( VOID )
 {
     int TileSet, Input, Sound, Priority, Lang, SaveExit;
+    char LangCode[40];
+    static const char *oldCodes[6] = { "en", "es", "nl", "de", "fr", "it" };
 
     hini = PrfOpenProfile (habMain, "MAKMAN.INI");
 
@@ -785,23 +649,28 @@ VOID GetOptionsFromIni( VOID )
     Input    = PrfQueryProfileInt(hini,szAppName,"Input Source",    0);
     Sound    = PrfQueryProfileInt(hini,szAppName,"Sound Enabled",   1);
     Priority = PrfQueryProfileInt(hini,szAppName,"Priority",        0);
-    Lang     = PrfQueryProfileInt(hini,szAppName,"Language",        LANG_EN);
+    Lang     = PrfQueryProfileInt(hini,szAppName,"Language",        0);     /* old index */
+    LangCode[0] = 0;
+    PrfQueryProfileString(hini, szAppName, "Language Code", "", LangCode, sizeof(LangCode));
     SaveExit = PrfQueryProfileInt(hini,szAppName,"Save On Exit",    1);
 
-    if (Lang < 0 || Lang >= LANG_COUNT) Lang = LANG_EN;
+    if (!LangCode[0]) strcpy(LangCode, oldCodes[(Lang >= 0 && Lang < 6) ? Lang : 0]);
 
     bSaveOnExit = (SaveExit != 0);
     WinCheckMenuItem(hwndMenu, IDM_SAVEONEXIT, bSaveOnExit);
 
     SetDefault (IDM_T_CLASSIC + TileSet);
-    SetDefault (IDM_KEYBOARD + Input);
+    // key mapping (older versions saved only the input source: 0 keyboard, 1 / 2 stick A / B)
+    if (!KmLoad(hini))
+        useJoystick = Input;
+    KmInit();
     if (Sound)
         SetDefault (IDM_SOUND_ON);
     else
         SetDefault (IDM_SOUND_OFF);
     SetDefault (IDM_PRI_NORMAL + Priority);
 
-    set_language(Lang);
+    Uni_SelectByCode(LangCode);
 
     PrfCloseProfile(hini);
 }
@@ -824,11 +693,7 @@ VOID SaveOptionsToIni( VOID )
        else
             TileSet = 2;
 
-    Input = 0;
-    if (WinIsMenuItemChecked(hwndMenu, IDM_JOY_A))
-        Input = 1;
-    if (WinIsMenuItemChecked(hwndMenu, IDM_JOY_B))
-        Input = 2;
+    Input = useJoystick;                 // still saved for older versions
 
     Sound = WinIsMenuItemChecked(hwndMenu, IDM_SOUND_ON) ? 1 : 0;
 
@@ -842,99 +707,12 @@ VOID SaveOptionsToIni( VOID )
     WriteProfileInt ("Input Source", Input);
     WriteProfileInt ("Sound Enabled",Sound);
     WriteProfileInt ("Priority",     Priority);
-    WriteProfileInt ("Language",     current_lang);
+    KmSave(hini);
+    PrfWriteProfileString(hini, szAppName, "Language Code", (PSZ)Uni_LangCode());
     WriteProfileInt ("Save On Exit", bSaveOnExit ? 1 : 0);
 
     PrfCloseProfile(hini);
 }
-
-VOID set_language( int lang )
-{
-    if (lang < 0 || lang >= LANG_COUNT) lang = LANG_EN;
-    current_lang = lang;
-
-    /* update all top-level and submenu item texts */
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_SUBMENU_GAME),
-               MPFROMP(tr(STR_MENU_GAME)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_NEW),
-               MPFROMP(tr(STR_MENU_NEW)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_PAUSE),
-               MPFROMP(tr(STR_MENU_PAUSE)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_QUIT_GAME),
-               MPFROMP(tr(STR_MENU_QUIT)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_EXIT),
-               MPFROMP(tr(STR_MENU_EXIT)));
-
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_SUBMENU_OPTS),
-               MPFROMP(tr(STR_MENU_OPTIONS)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_SUBMENU_TILESET),
-               MPFROMP(tr(STR_MENU_TILESET)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_T_CLASSIC),
-               MPFROMP(tr(STR_MENU_CLASSIC)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_T_3D),
-               MPFROMP(tr(STR_MENU_3D)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_T_NEWLOOK),
-               MPFROMP(tr(STR_MENU_FUFITOS)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_SUBMENU_CONTROLS),
-               MPFROMP(tr(STR_MENU_CONTROLS)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_KEYBOARD),
-               MPFROMP(tr(STR_MENU_KEYBOARD)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_JOY_A),
-               MPFROMP(tr(STR_MENU_JOYA)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_JOY_B),
-               MPFROMP(tr(STR_MENU_JOYB)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_SUBMENU_CAL),
-               MPFROMP(tr(STR_MENU_CALIBRATE)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_CAL_A),
-               MPFROMP(tr(STR_MENU_CALJOYSTICK_A)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_CAL_B),
-               MPFROMP(tr(STR_MENU_CALJOYSTICK_B)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_SUBMENU_SOUND),
-               MPFROMP(tr(STR_MENU_SOUND)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_SOUND_ON),
-               MPFROMP(tr(STR_MENU_SOUND_ON)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_SOUND_OFF),
-               MPFROMP(tr(STR_MENU_SOUND_OFF)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_SUBMENU_PRI),
-               MPFROMP(tr(STR_MENU_PRIORITY)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_PRI_NORMAL),
-               MPFROMP(tr(STR_MENU_PRI_NORMAL)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_PRI_CRIT),
-               MPFROMP(tr(STR_MENU_PRI_CRITICAL)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_PRI_SERVER),
-               MPFROMP(tr(STR_MENU_PRI_SERVER)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_SUBMENU_LANG),
-               MPFROMP(tr(STR_MENU_LANGUAGE)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_SAVEONEXIT),
-               MPFROMP(tr(STR_MENU_SAVEONEXIT)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_BACKGRND),
-               MPFROMP(tr(STR_MENU_BACKGRND)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_FRAME),
-               MPFROMP(tr(STR_MENU_FRAME)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_SUBMENU_HELP),
-               MPFROMP(tr(STR_MENU_HELP)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_HELPABOUT),
-               MPFROMP(tr(STR_MENU_ABOUT)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_HELPINDEX),
-               MPFROMP(tr(STR_MENU_HELPINDEX)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_HELPEXTENDED),
-               MPFROMP(tr(STR_MENU_HELPGEN)));
-    WinSendMsg(hwndMenu, MM_SETITEMTEXT, MPFROMSHORT(IDM_HELPHELPFORHELP),
-               MPFROMP(tr(STR_MENU_HELPUSING)));
-
-    /* check active language in Language submenu */
-    WinCheckMenuItem(hwndMenu, IDM_LANG_EN, lang == LANG_EN);
-    WinCheckMenuItem(hwndMenu, IDM_LANG_ES, lang == LANG_ES);
-    WinCheckMenuItem(hwndMenu, IDM_LANG_NL, lang == LANG_NL);
-    WinCheckMenuItem(hwndMenu, IDM_LANG_DE, lang == LANG_DE);
-    WinCheckMenuItem(hwndMenu, IDM_LANG_FR, lang == LANG_FR);
-    WinCheckMenuItem(hwndMenu, IDM_LANG_IT, lang == LANG_IT);
-
-    /* load the help file of the new language (once the window exists) */
-    if (hwndFrame)
-        HelpInit();
-}
-
 
 extern char topNames[15][100];
 extern long topScores[15];
@@ -942,22 +720,49 @@ extern long topScores[15];
 VOID GetScoresFromIni ( VOID )
 {
     ULONG bMax;
+    char  tmp[15][100];
+    int   i;
 
     hini = PrfOpenProfile(habMain, "MAKMAN.INI");
 
-    bMax = 15*100;
-    PrfQueryProfileData(hini, szAppName, "ScoreNames", topNames, &bMax);
+    /* names: "ScoreNamesU" is UTF-8; older versions stored "ScoreNames" in the code page */
+    bMax = sizeof(tmp);
+    if (PrfQueryProfileData(hini, szAppName, "ScoreNamesU", tmp, &bMax) && bMax == sizeof(tmp))
+    {
+        for (i = 0; i < 15; i++)
+        {
+            tmp[i][99] = 0;
+            strcpy(topNames[i], tmp[i]);
+        }
+    }
+    else
+    {
+        bMax = sizeof(tmp);
+        if (PrfQueryProfileData(hini, szAppName, "ScoreNames", tmp, &bMax) && bMax == sizeof(tmp))
+            for (i = 0; i < 15; i++)
+            {
+                tmp[i][99] = 0;
+                Uni_NameFromEntry(tmp[i], topNames[i], sizeof(topNames[i]));
+            }
+    }
     bMax = 15 * sizeof(long);
     PrfQueryProfileData(hini, szAppName, "Scores", topScores, &bMax);
 
     PrfCloseProfile(hini);
 }
-
 VOID SaveScoresToIni( VOID )
 {
     hini = PrfOpenProfile(habMain, "MAKMAN.INI");
 
-    PrfWriteProfileData(hini, szAppName, "ScoreNames", topNames, 15*100);
+    {
+        char old[15][100];
+        int  i;
+
+        PrfWriteProfileData(hini, szAppName, "ScoreNamesU", topNames, 15*100);   /* UTF-8 */
+        for (i = 0; i < 15; i++)                                                 /* old versions */
+            Uni_NameToCp(topNames[i], old[i], sizeof(old[i]));
+        PrfWriteProfileData(hini, szAppName, "ScoreNames", old, 15*100);
+    }
     PrfWriteProfileData(hini, szAppName, "Scores", topScores, 15 * sizeof(long));
 
     PrfCloseProfile(hini);

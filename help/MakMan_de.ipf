@@ -42,7 +42,7 @@ Weitere Informationen&colon.
 :h1 res=2102.Steuerung
 :i1.Steuerung
 :p.
-Mit der Tastatur bewegen die Pfeiltasten links, rechts, oben und unten MakMan. Fuer einen Joystick waehlen Sie Joystick A oder Joystick B unter Optionen - Steuerung; dort kann der Joystick auch kalibriert werden. Solange ein Joystick aktiv ist, steuert die Tastatur MakMan nicht.
+Standardmaessig bewegen die Pfeiltasten links, rechts, oben und unten MakMan. Optionen - Tastenzuordnung... oeffnet ein Fenster, in dem Sie die Taste fuer jede Richtung waehlen (Seite Tastatur) und einen Joystick einrichten (Seite Joystick)&colon. Joystick aktivieren ankreuzen, Joystick A oder B waehlen, jeder Richtung eine Joystick-Taste oder eine Stickrichtung zuweisen und mit A kalibrieren / B kalibrieren die Mitte des Sticks festlegen. Tastatur und Joystick arbeiten zusammen. Die Zuordnung wird mit den anderen Einstellungen gespeichert.
 :p.
 :dl break=all.
 :dt.Pfeiltasten
@@ -96,14 +96,14 @@ Mit der Tastatur bewegen die Pfeiltasten links, rechts, oben und unten MakMan. F
 :dl break=all.
 :dt.Kachelsatz
 :dd.Waehlt die Grafik von Labyrinth und Figuren&colon. Klassisch, 3D-Stil oder Fufitos. Der Kachelsatz kann nur geaendert werden, wenn kein Spiel laeuft.
-:dt.Steuerung
-:dd.Waehlt Tastatur oder einen Joystick (Joystick A oder B) und kalibriert den Joystick.
+:dt.Tastenzuordnung
+:dd.Oeffnet das Fenster Tastenzuordnung&colon. Tasten fuer die vier Richtungen, Joystick-Auswahl, Tasten und Kalibrierung.
 :dt.Sound
 :dd.Schaltet die Soundeffekte ein oder aus.
 :dt.Prioritaet
 :dd.Stellt die Prioritaet des Spiels ein (Normal, Kritisch oder Server). Verwenden Sie Kritisch oder Server nur, wenn das Spiel auf einem ausgelasteten System ruckelt.
 :dt.Sprache
-:dd.Aendert die Sprache der Menues und dieser Hilfe (English, Espanol, Nederlands, Deutsch, Francais, Italiano).
+:dd.Aendert die Sprache der Menues und Dialoge. Die Sprachen sind die Dateien im Ordner lang (English, Espanol, Nederlands, Deutsch, Francais, Italiano, Japanese, Chinese, Korean, Russian, Greek). Diese Hilfe gibt es in den ersten sechs Sprachen; fuer die uebrigen wird die englische Hilfe angezeigt.
 :dt.Hintergrundlauf
 :dd.Ist die Option ausgeschaltet, pausiert das Spiel automatisch, wenn das Fenster den Fokus verliert.
 :dt.Rahmenbedienung
@@ -136,12 +136,16 @@ MakMan/2 verwendet standardmaessig GPI-Grafik. Ein Parameter in der Kommandozeil
 :dd.Dasselbe wie oben.
 :dt.makman dive
 :dd.DIVE-Grafik. Erfordert einen DIVE-faehigen Grafiktreiber.
+:dt.makman -plainmenus
+:dd.Menuepunkte werden nie selbst gezeichnet; Zeichen, die die Codepage nicht kennt, erscheinen als ?.
+:dt.makman -unicodemenus
+:dd.Alle Menuepunkte werden mit Unicode-Text gezeichnet (normalerweise nur die, die es brauchen).
 :edl.
 
 :h1 res=2108.Copyright
 :i1.Copyright
 :p.
-MakMan/2 Version 1.1
+MakMan/2 Version 1.3
 :p.
 Copyright (C) 1995 Markellos J. Diorinos. Open-Watcom-Portierung und Erweiterungen, 2026.
 :p.

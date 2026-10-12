@@ -42,7 +42,7 @@ Meer informatie&colon.
 :h1 res=2102.Besturing
 :i1.Besturing
 :p.
-Met het toetsenbord bewegen de pijltoetsen links, rechts, omhoog en omlaag MakMan. Kies voor een joystick Joystick A of Joystick B in Opties - Besturing; daar kunt u de joystick ook kalibreren. Zolang een joystick actief is, stuurt het toetsenbord MakMan niet.
+Standaard bewegen de pijltoetsen links, rechts, omhoog en omlaag MakMan. Opties - Toetsen toewijzen... opent een venster waar u de toets voor elke richting kiest (pagina Toetsenbord) en een joystick instelt (pagina Joystick)&colon. vink Joystick gebruiken aan, kies Joystick A of B, geef elke richting een joystickknop of een stickrichting en gebruik Kalibreer A / B om het midden van de stick in te stellen. Toetsenbord en joystick werken samen. De toewijzing wordt met de andere instellingen opgeslagen.
 :p.
 :dl break=all.
 :dt.Pijltoetsen
@@ -96,14 +96,14 @@ Met het toetsenbord bewegen de pijltoetsen links, rechts, omhoog en omlaag MakMa
 :dl break=all.
 :dt.Tegelset
 :dd.Kiest de afbeeldingen van het doolhof en de figuren&colon. Klassiek, 3D-Stijl of Fufitos. De tegelset kan alleen worden gewijzigd als er geen spel bezig is.
-:dt.Besturing
-:dd.Kiest Toetsenbord of een joystick (Joystick A of B) en kalibreert de joystick.
+:dt.Toetsen toewijzen
+:dd.Opent het venster Toetsen toewijzen&colon. toetsen voor de vier richtingen, joystickkeuze, knoppen en kalibratie.
 :dt.Geluid
 :dd.Zet de geluidseffecten aan of uit.
 :dt.Prioriteit
 :dd.Stelt de prioriteit van het spel in (Normaal, Kritiek of Server). Gebruik Kritiek of Server alleen als het spel onregelmatig loopt op een druk systeem.
 :dt.Taal
-:dd.Wijzigt de taal van de menu's en van deze help (English, Espanol, Nederlands, Deutsch, Francais, Italiano).
+:dd.Wijzigt de taal van de menu's en dialogen. De talen zijn de bestanden in de map lang (English, Espanol, Nederlands, Deutsch, Francais, Italiano, Japanese, Chinese, Korean, Russian, Greek). Deze help bestaat in de eerste zes talen; voor de andere talen wordt de Engelse help getoond.
 :dt.Achtergrond Actief
 :dd.Als dit uit staat, pauzeert het spel automatisch wanneer het venster de focus verliest.
 :dt.Raambediening
@@ -136,12 +136,16 @@ MakMan/2 gebruikt standaard GPI-graphics. Een parameter op de opdrachtregel kies
 :dd.Hetzelfde als hierboven.
 :dt.makman dive
 :dd.DIVE-graphics. Vereist een DIVE-compatibel beeldschermstuurprogramma.
+:dt.makman -plainmenus
+:dd.Menu-items worden nooit zelf getekend; tekens die de codepagina niet heeft verschijnen als ?.
+:dt.makman -unicodemenus
+:dd.Alle menu-items worden met Unicode-tekst getekend (normaal alleen de items die dat nodig hebben).
 :edl.
 
 :h1 res=2108.Copyright
 :i1.Copyright
 :p.
-MakMan/2 versie 1.1
+MakMan/2 versie 1.3
 :p.
 Copyright (C) 1995 Markellos J. Diorinos. Open Watcom-port en verbeteringen, 2026.
 :p.

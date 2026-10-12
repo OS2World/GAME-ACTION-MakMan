@@ -12,6 +12,7 @@
 #define  INCL_DOSPROCESS                 /* Required for OS/2 process APIs.   */
 #define  INCL_DOSERRORS
 #define  INCL_WINHELP                    /* Required to use IPF.              */
+#define  INCL_DOSMODULEMGR              /* DosLoadModule: MMPM/2 is loaded at run time */
 #define  INCL_DOSMEMMGR                  /* Required to use memory API's.     */
 #define  INCL_SECONDARYWINDOW            /* required for secondary window     */
 
@@ -34,6 +35,56 @@
 #include "debug.h"
 
 extern HWND hwndFrame;
+
+//
+// MMPM/2 is loaded at run time.  When MMIO.DLL cannot start (its initialization fails on some
+// systems) a program that imports it ends before main() without a word; this way the game
+// runs without sound instead.
+//
+static HMMIO  (APIENTRY *pfnMmioOpen)(PSZ, PMMIOINFO, ULONG);
+static USHORT (APIENTRY *pfnMmioClose)(HMMIO, USHORT);
+static ULONG  (APIENTRY *pfnMmioGetHeader)(HMMIO, PVOID, LONG, PLONG, ULONG, ULONG);
+static ULONG  (APIENTRY *pfnMciSendCommand)(USHORT, USHORT, ULONG, PVOID, USHORT);
+static int    bMM = 0;                 // MMPM/2 is available
+
+#define mmioOpen       pfnMmioOpen
+#define mmioClose      pfnMmioClose
+#define mmioGetHeader  pfnMmioGetHeader
+#define mciSendCommand pfnMciSendCommand
+
+static PFN MMSym(HMODULE hmod, const char *name)
+{
+    PFN   pfn = NULL;
+    char  up[40];
+    int   i;
+
+    if (DosQueryProcAddr(hmod, 0, (PSZ)name, &pfn) == NO_ERROR)
+        return pfn;
+    for (i = 0; name[i] && i < 38; i++)
+        up[i] = (name[i] >= 'a' && name[i] <= 'z') ? (char)(name[i] - 32) : name[i];
+    up[i] = 0;
+    if (DosQueryProcAddr(hmod, 0, (PSZ)up, &pfn) == NO_ERROR)
+        return pfn;
+    return NULL;
+}
+
+static int LoadMMPM(void)
+{
+    HMODULE hmodMMIO = NULLHANDLE, hmodMDM = NULLHANDLE;
+    char    err[CCHMAXPATH];
+
+    if (bMM)
+        return 1;
+    if (DosLoadModule((PSZ)err, sizeof(err), (PSZ)"MMIO", &hmodMMIO) != NO_ERROR ||
+        DosLoadModule((PSZ)err, sizeof(err), (PSZ)"MDM",  &hmodMDM)  != NO_ERROR)
+        return 0;
+    *(PFN *)&pfnMmioOpen       = MMSym(hmodMMIO, "mmioOpen");
+    *(PFN *)&pfnMmioClose      = MMSym(hmodMMIO, "mmioClose");
+    *(PFN *)&pfnMmioGetHeader  = MMSym(hmodMMIO, "mmioGetHeader");
+    *(PFN *)&pfnMciSendCommand = MMSym(hmodMDM,  "mciSendCommand");
+    bMM = pfnMmioOpen && pfnMmioClose && pfnMmioGetHeader && pfnMciSendCommand;
+    return bMM;
+}
 
 HMMIO  waveHandle[maxWaveEffects];
 MMIOINFO waveInfo[maxWaveEffects];
@@ -67,9 +118,8 @@ mmpm2::~mmpm2()
 
 int mmpm2::open()
 {
-
-    // everything was OK
-    return 1;
+    // 0 when MMPM/2 is not available: the game goes on without sound
+    return LoadMMPM();
 
 
 }
@@ -99,6 +149,9 @@ int mmpm2::load ( char* acFileName )
     HMMIO  hFile;           
     MMAUDIOHEADER mmHeader;     
     ULONG ulRC, ulBytesRead, newPos;
+
+    if (!bMM)
+        return 0;
 
     // find an empty position for the new wave data
     for (newPos = 0; (waveHandle[newPos]!=NULL) && (newPos < maxWaveEffects); newPos++);
@@ -251,6 +304,9 @@ void mmpm2::INT_play ( int effect )
 
     
     ULONG rc;
+
+    if (!bMM)
+        return;
 
     parms.hwndCallback = hwndFrame;
     parms.pszElementName = (PSZ) waveHandle[effect];

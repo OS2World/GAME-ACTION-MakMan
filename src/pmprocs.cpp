@@ -16,6 +16,8 @@
 #include "PmIDs.hpp"
 #include "PmKEYS.hpp"
 #include "lang.h"
+#include "unitext.hpp"
+#include "keymap.hpp"
 #include <os2me.h>
 #include <stdio.h>
 #include <string.h>
@@ -146,16 +148,12 @@ void ShowGameHighscore( HPS hps, RECTL rcl )
 
     for (int i=0; i<15; i++)
     {
-	point.x = 70;
-	point.y = 420 - i*24;	
+	/* names are UTF-8: drawn through the Unicode path (any script) */
 	sprintf(txt, "%02i. %s", i+1, topNames[i]);
-	GpiCharStringAt(hps, &point, strlen(txt), txt);
+	Uni_DrawUtf8(hps, 70, 420 - i*24, txt, 18, CLR_CYAN);
 
-
-	point.x = 470;
-	point.y = 420 - i*24;	
-    sprintf(txt, "%08li", topScores[i]);
-	GpiCharStringAt(hps, &point, strlen(txt), txt);
+	sprintf(txt, "%08li", topScores[i]);
+	Uni_DrawUtf8(hps, 470, 420 - i*24, txt, 18, CLR_CYAN);
     }
 
     long bababuba = 2;
@@ -175,10 +173,7 @@ void ShowGameHighscore( HPS hps, RECTL rcl )
     GpiSetCharSet(hps, bababuba);
 
     GpiSetColor(hps, CLR_RED);
-    sprintf(txt, "%s v%s Top 15 Players", szAppName, szAppVersion);
-    point.y = 510;
-    point.x = 213;
-    GpiCharStringAt(hps, &point, strlen(txt), txt);
+    Uni_DrawHighscoreTitle(hps, sizlMaxClient.cx, 510);
 
     long ClopyFont = 3;
     fat.usRecordLength = sizeof(FATTRS);
@@ -400,59 +395,16 @@ MRESULT EXPENTRY ClientWndProc(HWND hwnd,ULONG msg,MPARAM mp1,MPARAM mp2)
 	    WinInvalidateRegion(hwndFrame, NULLHANDLE, TRUE);
 	    break;
 
-    case IDM_KEYBOARD:
-	    if (useJoystick)
-		CheckMenu(IDM_JOY_A + useJoystick -1, FALSE);
-	    CheckMenu(IDM_KEYBOARD, TRUE);
-	    useJoystick = 0;
-	    break;
-    case IDM_JOY_A:
-    case IDM_JOY_B:
-	    CheckMenu(IDM_KEYBOARD, FALSE);
-	    if (useJoystick)
-		CheckMenu(IDM_JOY_A + useJoystick -1, FALSE);	
-	    CheckMenu(SHORT1FROMMP(mp1), TRUE);
-	    useJoystick = SHORT1FROMMP(mp1) - IDM_JOY_A + 1;
-	    break;
-	
-	case IDM_CAL_A:
-	case IDM_CAL_B:
+	case IDM_KEYMAPPING:
 	{
-	
-	    // Joystick Calibration
-	    // ********************
-	    GAME_STATUS_STRUCT joy;
-	    GAME_2DPOS_STRUCT *joyData = &joy.curdata.A;
-	    ULONG dataLen = sizeof(joy);
-	    ULONG calJoystick;
-	
-	    calJoystick = SHORT1FROMMP(mp1) - IDM_CAL_A + 1;
-	
-	    WinMessageBox(HWND_DESKTOP,
-			  hwndFrame,
-			  (PSZ)"Leave the Joystick alone and click OK",
-			  (PSZ)"MakMan/2 Joystick Calibration",
-			  0,
-			  MB_MOVEABLE | MB_INFORMATION | MB_OK );
-	
-	    DosDevIOCtl( hGame, IOCTL_CAT_USER, GAME_GET_STATUS,
-			NULL, 0, NULL,
-			&joy, dataLen, &dataLen);
-	
-	    joyCal[calJoystick].x = joyData[calJoystick-1].x;
-	    joyCal[calJoystick].y = joyData[calJoystick-1].y;
-	
-	    if (debOut)
-	    {
-		fprintf(debOut, "Joystick %i X : %i, Y: %i\n",
-			calJoystick,
-			joyCal[calJoystick].x,
-			joyCal[calJoystick].y);
-		fflush(debOut);
-	    }
+	    // the game waits while the dialog is open
+	    BOOL bSuspend = gameRunning && !WinIsMenuItemChecked(hwndMenu, IDM_PAUSE);
+	    if (bSuspend) DosSuspendThread(tidAsync);
+	    KmDialog(hwndFrame);
+	    if (bSuspend) DosResumeThread(tidAsync);
 	}
 	    break;
-	
+
 	case IDM_PRI_NORMAL:
 	case IDM_PRI_CRIT:
 	case IDM_PRI_SERVER:
@@ -476,12 +428,38 @@ MRESULT EXPENTRY ClientWndProc(HWND hwnd,ULONG msg,MPARAM mp1,MPARAM mp2)
 	    SndEng->stop();
 	    break;	
 
-    case IDM_LANG_EN:
-    case IDM_LANG_ES:
-    case IDM_LANG_NL:
-    case IDM_LANG_DE:
-    case IDM_LANG_FR:
-    case IDM_LANG_IT:
+    case IDM_LANG_EN + 0:
+    case IDM_LANG_EN + 1:
+    case IDM_LANG_EN + 2:
+    case IDM_LANG_EN + 3:
+    case IDM_LANG_EN + 4:
+    case IDM_LANG_EN + 5:
+    case IDM_LANG_EN + 6:
+    case IDM_LANG_EN + 7:
+    case IDM_LANG_EN + 8:
+    case IDM_LANG_EN + 9:
+    case IDM_LANG_EN + 10:
+    case IDM_LANG_EN + 11:
+    case IDM_LANG_EN + 12:
+    case IDM_LANG_EN + 13:
+    case IDM_LANG_EN + 14:
+    case IDM_LANG_EN + 15:
+    case IDM_LANG_EN + 16:
+    case IDM_LANG_EN + 17:
+    case IDM_LANG_EN + 18:
+    case IDM_LANG_EN + 19:
+    case IDM_LANG_EN + 20:
+    case IDM_LANG_EN + 21:
+    case IDM_LANG_EN + 22:
+    case IDM_LANG_EN + 23:
+    case IDM_LANG_EN + 24:
+    case IDM_LANG_EN + 25:
+    case IDM_LANG_EN + 26:
+    case IDM_LANG_EN + 27:
+    case IDM_LANG_EN + 28:
+    case IDM_LANG_EN + 29:
+    case IDM_LANG_EN + 30:
+    case IDM_LANG_EN + 31:
         set_language(SHORT1FROMMP(mp1) - IDM_LANG_EN);
         break;
 
@@ -589,10 +567,15 @@ MRESULT EXPENTRY ClientWndProc(HWND hwnd,ULONG msg,MPARAM mp1,MPARAM mp2)
         break;
 
     case WM_CHAR:
-        // This is a key down transition and keyboard is used as an Input device
-        if (!useJoystick)
-            if (!(CHARMSG(&msg)->fs & KC_KEYUP))
-                Eng_ProcessInput( CHARMSG(&msg)->vkey );
+        // Alt+mnemonic of an owner-drawn (Unicode) top-level menu
+        if (Uni_AltKey(mp1, mp2))
+            return MRFROMLONG(TRUE);
+        // a mapped key (Options - Key Mapping) steers MakMan
+        {
+            int act = KmKeyAction(mp1, mp2);
+            if (act >= 0)
+                Eng_SetMove(act);
+        }
         break;
 
 
@@ -733,6 +716,13 @@ MRESULT EXPENTRY AboutBoxDlgProc(HWND hwnd, ULONG msg,MPARAM mp1,MPARAM mp2)
 {
 
     switch(msg)  {
+    case WM_PAINT:
+    {
+        MRESULT r = WinDefDlgProc(hwnd, msg, mp1, mp2);
+        Uni_PaintAbout(hwnd);          /* Unicode texts on top of the dialog */
+        return r;
+    }
+
     case WM_COMMAND:
 	/* no matter what the command, close the dialog */
 	WinDismissDlg(hwnd, TRUE);
@@ -756,9 +746,45 @@ char HighName[400];
 MRESULT EXPENTRY HighScoreDlgProc(HWND hwnd, ULONG msg,MPARAM mp1,MPARAM mp2)
 {
     int i;
+    static BOOL fDone;
 
     switch(msg)  {
+    case WM_INITDLG:
+    {
+        MRESULT r = WinDefDlgProc(hwnd, msg, mp1, mp2);
+        fDone = FALSE;
+        WinSetWindowText(hwnd, tr(STR_HS_DLG_TITLE));
+        WinSendDlgItemMsg(hwnd, DID_HIGHNAME, EM_SETTEXTLIMIT, MPFROMSHORT(40), 0);
+        Uni_LayoutHighscoreDlg(hwnd);
+        return r;
+    }
+
+    case WM_PAINT:
+    {
+        MRESULT r = WinDefDlgProc(hwnd, msg, mp1, mp2);
+        Uni_PaintHighscoreDlg(hwnd);          /* Unicode texts on top of the dialog */
+        return r;
+    }
+
+    case WM_CONTROL:
+        if (SHORT2FROMMP(mp1) == BN_PAINT)    /* the two buttons are owner drawn */
+        {
+            Uni_DrawButton((PUSERBUTTON)PVOIDFROMMP(mp2),
+                           SHORT1FROMMP(mp1) == DID_OK ? STR_HS_BTN_OK : STR_HS_BTN_CANCEL);
+            return 0L;
+        }
+        if (SHORT2FROMMP(mp1) == BN_CLICKED &&
+            (SHORT1FROMMP(mp1) == DID_OK || SHORT1FROMMP(mp1) == DID_CANCEL))
+        {
+            WinPostMsg(hwnd, WM_COMMAND, MPFROMSHORT(SHORT1FROMMP(mp1)),
+                       MPFROM2SHORT(CMDSRC_PUSHBUTTON, TRUE));
+            return 0L;
+        }
+        return(WinDefDlgProc(hwnd, msg, mp1, mp2));
+
     case WM_COMMAND:
+        if (fDone) return 0L;                 /* click + command: handle once */
+        fDone = TRUE;
         switch (SHORT1FROMMP(mp1)) {
             case DID_OK:
                 proud = 1;
@@ -774,7 +800,8 @@ MRESULT EXPENTRY HighScoreDlgProc(HWND hwnd, ULONG msg,MPARAM mp1,MPARAM mp2)
             topScores[i+1] = topScores[i];
         }
 
-        strcpy(topNames[newScorePos], HighName);
+        /* the entry field delivers the process code page; keep names as UTF-8 */
+        Uni_NameFromEntry(HighName, topNames[newScorePos], sizeof(topNames[newScorePos]));
         topScores[newScorePos] = myScore;
 
         // redraw scores

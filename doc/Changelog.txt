@@ -2,6 +2,44 @@ MakMan/2 for OS/2 - Changelog
 ==============================
 
 
+Version 1.3 (2026-10-12)
+------------------------
+- New Options > Key Mapping... window (Keyboard and Joystick pages, 12 languages) replaces the
+  Options > Controls submenu: any key for the four directions, joystick A / B with buttons or stick
+  directions per direction, Calibrate A / B; saved in MAKMAN.INI; keyboard and joystick work together
+- MMPM/2 (MMIO.DLL, MDM.DLL) is now loaded at run time. When MMIO.DLL cannot start (its
+  initialisation fails on some systems) the program used to end before main() without any message;
+  now it starts and runs without sound
+- Help (6 languages), readme, BLDLEVEL and About box updated to 1.3
+
+Version 1.2.1 (2026-10-08)
+--------------------------
+- Text is drawn as UTF-8 through GPI code page 1208 (as PMUniText 0.3 does): the UTF-8 to UCS-2
+  conversion for drawing is gone; ULS is only used for the plain-menu fallback and for converting
+  names typed in the high score entry field
+- Version, BLDLEVEL, About box, readme and help files updated to 1.2.1
+
+
+Version 1.2 (2026-10-07)
+--------------------------
+- Unicode support: all menu, About, help-title and high-score texts now come from UTF-8
+  language files (lang\*.txt next to makman.exe) instead of tables compiled into the exe
+- 12 languages: English, Espanol, Nederlands, Deutsch, Francais, Italiano (now with their
+  accents) plus Japanese, Simplified and Traditional Chinese, Korean, Russian and Greek
+- Menu items whose text the code page cannot show are owner drawn with GPI code page 1200;
+  other items stay normal PM text items. Mnemonics (~) and accelerator text work in both
+- The Language menu is built from the lang folder; the language is saved by code in the INI
+- Languages without an IPF help file (no Unicode in IPF) use the English help
+- New command line switches: -plainmenus, -unicodemenus
+- High score entry dialog is translated (Unicode text and owner-drawn buttons); the names are
+  stored as UTF-8 in MAKMAN.INI (key ScoreNamesU, old code page names are converted on first
+  load) and drawn with the Unicode font on the high score screen
+- Command line parser accepts the new switches together with gpi / dive
+- Version, BLDLEVEL, About box, readme and help files updated to 1.2
+- Fixed a latent crash: ghost::myPhase and the sprite heartbeat were never initialised (the ghost
+  animation indexed an array with heap garbage); it only worked while new memory happened to be zero
+
+
 Version 1.1 (2026-09-10)
 --------------------------
 - Open Watcom C/C++ port (wpp386/wmake/wrc); src/, bin/, doc/ folder structure

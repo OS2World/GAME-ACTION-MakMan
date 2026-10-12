@@ -1,13 +1,13 @@
-MakMan/2 for OS/2 - Version 1.1
-================================
+MakMan/2 for OS/2 - Version 1.3
+==================================
 
 
 OVERVIEW
 --------
 MakMan/2 is a full color, full sound PacMan clone for OS/2 and ArcaOS,
 originally written in 1995 by Markellos J. Diorinos. This version is an
-Open Watcom port with enhanced menus, keyboard shortcuts, six-language
-support, online help and settings persistence. MakMan/2 is free software
+Open Watcom port with enhanced menus, keyboard shortcuts, Unicode text
+in twelve languages, online help and settings persistence. MakMan/2 is free software
 released under the GNU General Public License (see LICENSE below).
 
 Features:
@@ -16,10 +16,10 @@ Features:
     to design your own
   - MMPM/2 sound
   - High score tracking (best 15 scores)
-  - Joystick support (keyboard or joystick A / B, with calibration)
+  - Key Mapping window: keyboard keys and joystick (A / B, buttons or stick, calibration)
   - GPI and DIVE graphics modes
-  - Menus and online help in English, Espanol, Nederlands, Deutsch,
-    Francais and Italiano
+  - Menus and dialogs in twelve languages (UTF-8 files, see LANGUAGES), online
+    help in English, Espanol, Nederlands, Deutsch, Francais and Italiano
 
 
 HOW TO PLAY
@@ -45,7 +45,7 @@ CONTROLS
   Ctrl+B        Toggle Background Run
   Ctrl+F        Toggle Frame Controls (borderless mode)
   F1            Help
-  Arrow keys    Move MakMan
+  Arrow keys    Move MakMan (default; Options > Key Mapping changes them)
 
 
 MENUS
@@ -56,7 +56,7 @@ MENUS
   Game > Exit           Close the application (Ctrl+X)
 
   Options > Tile Set    Choose tile graphics (Classic, 3D, Fufitos)
-  Options > Controls    Choose input device (Keyboard, Joystick A/B)
+  Options > Key Mapping Keys for the four directions, joystick A / B, buttons, calibration
   Options > Sound       Enable or disable sound
   Options > Priority    Set thread priority
   Options > Language    Switch display language (menus and help)
@@ -88,6 +88,7 @@ FILE LIST
 ---------
   bin\makman.exe    The game executable
   bin\help\         Online help, one file per language (MakMan_en.hlp, ...)
+  lang\           Language files (UTF-8)
   doc\readme.txt    This file
   doc\Changelog.txt Change history
   doc\License.txt   GNU General Public License version 3
@@ -126,7 +127,11 @@ HISTORY
 -------
   MakMan/2 1.0 (1995) was released by Markellos J. Diorinos as shareware
   for OS/2 (PM and DIVE). The source code was later released under the
-  GNU GPL. Version 1.1 (2026) is the Open Watcom port. See
+  GNU GPL. Version 1.1 (2026) was the Open Watcom port; version 1.2
+  (2026) adds Unicode text: UTF-8 language files, Asian and other scripts in
+  the menus and dialogs, and a translated high score entry; version 1.2.1
+  draws the UTF-8 text directly with GPI code page 1208; version 1.3 adds the
+  Key Mapping window and runs without sound when MMPM/2 cannot start. See
   doc\Changelog.txt for details.
 
 

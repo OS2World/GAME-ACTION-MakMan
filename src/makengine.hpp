@@ -15,7 +15,6 @@ int  Eng_NewGame   ( VOID );
 int  Eng_StartGame ( VOID );
 int  Eng_SetOfs ( int x, int y );
 int  Eng_ShowPlayfield( VOID );
-int  Eng_ProcessInput ( SHORT );
 //
 // 'External' data
 

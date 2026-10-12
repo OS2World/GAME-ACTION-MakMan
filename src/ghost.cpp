@@ -80,6 +80,8 @@ ghost::ghost ()
 {
 
     phaseDir = +1;
+    myPhase   = 0;     // were never initialised: the ghost animation indexed tiles[][][myPhase]
+    heartbeat = 0;     // with whatever the heap contained
     crntMove  = move_right;
     crntStatus= hatching;
 

@@ -35,6 +35,7 @@ sprite::sprite ( int nrphases, char** filenames )
     pos[horizontal] = pos[vertical] = 0;
     pixOfs = 0;
     crntPhase = 0;
+    heartbeat = 0;
 }
 
 sprite::~sprite ()

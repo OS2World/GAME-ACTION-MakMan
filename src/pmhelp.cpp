@@ -14,12 +14,6 @@
 #include <stdio.h>
 #include <string.h>
 
-static const char *pszHelpFiles[LANG_COUNT] =
-{
-    "MakMan_en.hlp", "MakMan_es.hlp", "MakMan_nl.hlp",
-    "MakMan_de.hlp", "MakMan_fr.hlp", "MakMan_it.hlp"
-};
-
 static HWND  hwndHelpInstance = NULLHANDLE;
 static BOOL  fHelpEnabled     = FALSE;
 static CHAR  szExeDir[CCHMAXPATH];       // folder of makman.exe with trailing backslash
@@ -68,8 +62,12 @@ VOID HelpInit(VOID)
 {
     HELPINIT heini;
     FILE    *fp;
-    const char *pszFile = pszHelpFiles[(current_lang >= 0 && current_lang < LANG_COUNT)
-                                       ? current_lang : LANG_EN];
+    char szFileName[40];
+    const char *pszFile = szFileName;
+
+    /* MakMan_<language code>.hlp; IPF help is not Unicode, so languages without a
+       help file of their own (Japanese, Chinese, ...) use the English one */
+    sprintf(szFileName, "MakMan_%s.hlp", Uni_LangCode());
 
     DropHelpInstance();
 
@@ -80,6 +78,14 @@ VOID HelpInit(VOID)
     strcat(szHelpLib, "help\\");
     strcat(szHelpLib, pszFile);
     fp = fopen(szHelpLib, "rb");
+    if (!fp)
+    {
+        strcpy(szFileName, "MakMan_en.hlp");
+        strcpy(szHelpLib, szExeDir);
+        strcat(szHelpLib, "help\\");
+        strcat(szHelpLib, pszFile);
+        fp = fopen(szHelpLib, "rb");
+    }
     if (fp)
         fclose(fp);
     else

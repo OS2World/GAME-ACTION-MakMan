@@ -42,7 +42,7 @@ Plus d'informations &colon.
 :h1 res=2102.Commandes
 :i1.Commandes
 :p.
-Au clavier, les fleches gauche, droite, haut et bas deplacent MakMan. Pour utiliser un joystick, choisissez Joystick A ou Joystick B dans Options - Controles ; vous pouvez aussi l'y calibrer. Tant qu'un joystick est actif, le clavier ne dirige pas MakMan.
+Par defaut, les fleches gauche, droite, haut et bas deplacent MakMan. Options - Affectation des touches... ouvre une fenetre ou vous choisissez la touche de chaque direction (page Clavier) et configurez un joystick (page Joystick)&colon. cochez Activer le joystick, choisissez Joystick A ou B, attribuez a chaque direction un bouton du joystick ou une direction du manche et utilisez Calibrer A / B pour fixer le centre du manche. Le clavier et le joystick fonctionnent ensemble. L'affectation est enregistree avec les autres reglages.
 :p.
 :dl break=all.
 :dt.Fleches
@@ -96,14 +96,14 @@ Au clavier, les fleches gauche, droite, haut et bas deplacent MakMan. Pour utili
 :dl break=all.
 :dt.Jeu de Carreaux
 :dd.Choisit les graphismes du labyrinthe et des personnages&colon. Classique, 3D ou Fufitos. Le jeu de carreaux ne peut etre change que lorsqu'aucune partie n'est en cours.
-:dt.Controles
-:dd.Choisit Clavier ou un joystick (Joystick A ou B) et calibre le joystick.
+:dt.Affectation des touches
+:dd.Ouvre la fenetre d'affectation des touches&colon. touches des quatre directions, choix du joystick, boutons et calibrage.
 :dt.Son
 :dd.Active ou desactive les effets sonores.
 :dt.Priorite
 :dd.Definit la priorite du jeu (Normale, Critique ou Serveur). N'utilisez Critique ou Serveur que si le jeu saccade sur un systeme charge.
 :dt.Langue
-:dd.Change la langue des menus et de cette aide (English, Espanol, Nederlands, Deutsch, Francais, Italiano).
+:dd.Change la langue des menus et des dialogues. Les langues sont les fichiers du dossier lang (English, Espanol, Nederlands, Deutsch, Francais, Italiano, Japanese, Chinese, Korean, Russian, Greek). Cette aide existe dans les six premieres langues ; pour les autres, l'aide anglaise est affichee.
 :dt.Arriere-plan Actif
 :dd.Si cette option est desactivee, la partie se met automatiquement en pause quand la fenetre perd le focus.
 :dt.Controles Cadre
@@ -136,12 +136,16 @@ MakMan/2 utilise par defaut les graphismes GPI. Un parametre sur la ligne de com
 :dd.Identique a ci-dessus.
 :dt.makman dive
 :dd.Graphismes DIVE. Necessite un pilote d'affichage compatible DIVE.
+:dt.makman -plainmenus
+:dd.Les elements de menu ne sont jamais dessines par le programme ; les caracteres absents de la page de codes s'affichent sous la forme ?.
+:dt.makman -unicodemenus
+:dd.Tous les elements de menu sont dessines avec du texte Unicode (normalement seulement ceux qui en ont besoin).
 :edl.
 
 :h1 res=2108.Copyright
 :i1.Copyright
 :p.
-MakMan/2 version 1.1
+MakMan/2 version 1.3
 :p.
 Copyright (C) 1995 Markellos J. Diorinos. Portage Open Watcom et ameliorations, 2026.
 :p.
