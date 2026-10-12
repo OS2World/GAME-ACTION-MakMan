@@ -7,6 +7,8 @@ Open Watcom port with enhanced menus, keyboard shortcuts, Unicode text in
 12 languages (UTF-8 language files, including Japanese, Chinese, Korean,
 Russian and Greek), online help, and settings persistence.
 
+![MakMan ScreenShot](/doc/MakMan.png)
+
 ## Controls
 
 | Input | Action |
